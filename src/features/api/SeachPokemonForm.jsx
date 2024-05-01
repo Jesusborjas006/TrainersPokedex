@@ -14,7 +14,7 @@ const SearchPokemonForm = () => {
   const submitPokemon = (e) => {
     e.preventDefault();
     if (pokemon) {
-      fetchTrigger(pokemon);
+      fetchTrigger(pokemon.toLowerCase());
     }
     setPokemon("");
   };
@@ -64,7 +64,7 @@ const SearchPokemonForm = () => {
               value={pokemon}
             />
             <button className="border px-2 rounded-md" onClick={submitPokemon}>
-              Search
+              Search Pokemon
             </button>
           </div>
         </form>
