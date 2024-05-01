@@ -1,6 +1,27 @@
 import { useState } from "react";
 import { useLazyGetPokemonQuery } from "./apiSlice";
 
+const typeColorStyles = {
+  bug: "#234B2C",
+  dark: "#040706",
+  dragon: "#448B95",
+  electric: "#E4E22B",
+  fairy: "#EA1369",
+  fighting: "#994024",
+  fire: "#AB1F23",
+  flying: "#93B2C7",
+  ghost: "#33336B",
+  grass: "#147B3D",
+  ground: "#A9702C",
+  ice: "#86D1F5",
+  normal: "#755259",
+  poison: "#9380A8",
+  psychic: "#F81C91",
+  rock: "#AEA6A5",
+  steel: "#44BC94",
+  water: "#1552E2",
+};
+
 const SearchPokemonForm = () => {
   const [pokemon, setPokemon] = useState("");
 
@@ -27,7 +48,7 @@ const SearchPokemonForm = () => {
     content = (
       <div className="border mt-20 rounded-xl">
         <img
-          className=" bg-[#eeeae3] w-[250px] rounded-t-xl"
+          className=" bg-[#eeeae3] w-[280px] rounded-t-xl"
           src={pokemonSpecies.sprites.front_default}
           alt={pokemonSpecies.name}
         />
@@ -39,7 +60,8 @@ const SearchPokemonForm = () => {
           <ul className="capitalize mt-2">
             {pokemonSpecies.types.map((types) => (
               <li
-                className="bg-yellow-500 text-center rounded-md"
+                className={`text-center rounded-md my-2 `}
+                style={{ backgroundColor: typeColorStyles[types.type.name] }}
                 key={types.type.name}
               >
                 {types.type.name}
