@@ -9,6 +9,8 @@ const SearchPokemonForm = () => {
 
   const handlePokemon = (e) => setPokemon(e.target.value);
 
+  console.log(pokemonSpecies);
+
   const submitPokemon = (e) => {
     e.preventDefault();
     if (pokemon) {
@@ -23,25 +25,51 @@ const SearchPokemonForm = () => {
     content = <p>Loading Pokemon data...</p>;
   } else if (isSuccess) {
     content = (
-      <div>
-        <h2>{pokemonSpecies.name}</h2>
+      <div className="border mt-20 rounded-xl">
+        <img
+          className=" bg-[#eeeae3] w-[250px] rounded-t-xl"
+          src={pokemonSpecies.sprites.front_default}
+          alt={pokemonSpecies.name}
+        />
+        <div className="px-2 py-4 rounded-b-xl">
+          <h2 className="text-2xl font-medium capitalize">
+            {pokemonSpecies.name}
+          </h2>
+          <p className="text-[#828282]">#{pokemonSpecies.id}</p>
+          <ul className="capitalize mt-2">
+            {pokemonSpecies.types.map((types) => (
+              <li
+                className="bg-yellow-500 text-center rounded-md"
+                key={types.type.name}
+              >
+                {types.type.name}
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     );
   }
 
   return (
     <>
-      <form className="text-center">
-        <label>Search Pokemon: </label>
-        <input
-          className="border"
-          type="text"
-          onChange={handlePokemon}
-          value={pokemon}
-        />
-        <button onClick={submitPokemon}>Submit</button>
-      </form>
-      {content}
+      <section className="flex justify-center">
+        <form className=" flex flex-col">
+          <label className="mb-1 text-lg">Name or Number: </label>
+          <div>
+            <input
+              className="border mr-4 rounded-md"
+              type="text"
+              onChange={handlePokemon}
+              value={pokemon}
+            />
+            <button className="border px-2 rounded-md" onClick={submitPokemon}>
+              Search
+            </button>
+          </div>
+        </form>
+      </section>
+      <div className="flex justify-center">{content}</div>
     </>
   );
 };
