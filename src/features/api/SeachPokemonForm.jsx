@@ -25,8 +25,10 @@ const typeColorStyles = {
 const SearchPokemonForm = () => {
   const [pokemon, setPokemon] = useState("");
 
-  const [fetchTrigger, { data: pokemonSpecies, isLoading, isSuccess }] =
-    useLazyGetPokemonQuery({});
+  const [
+    fetchTrigger,
+    { data: pokemonSpecies, isLoading, isSuccess, isError, error },
+  ] = useLazyGetPokemonQuery({});
 
   const handlePokemon = (e) => setPokemon(e.target.value);
 
@@ -38,7 +40,7 @@ const SearchPokemonForm = () => {
     setPokemon("");
   };
 
-  console.log(pokemonSpecies);
+  console.log(error);
 
   let content;
 
@@ -93,6 +95,8 @@ const SearchPokemonForm = () => {
         </div>
       </section>
     );
+  } else if (isError) {
+    content = <p className="mt-10">Pokemon {error.data}. Typo maybe?</p>;
   }
 
   return (
