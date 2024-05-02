@@ -30,8 +30,6 @@ const SearchPokemonForm = () => {
 
   const handlePokemon = (e) => setPokemon(e.target.value);
 
-  console.log(pokemonSpecies);
-
   const submitPokemon = (e) => {
     e.preventDefault();
     if (pokemon) {
@@ -40,36 +38,60 @@ const SearchPokemonForm = () => {
     setPokemon("");
   };
 
+  console.log(pokemonSpecies);
+
   let content;
 
   if (isLoading) {
     content = <p>Loading Pokemon data...</p>;
   } else if (isSuccess) {
     content = (
-      <div className="border mt-20 rounded-xl">
-        <img
-          className=" bg-[#eeeae3] w-[280px] rounded-t-xl"
-          src={pokemonSpecies.sprites.front_default}
-          alt={pokemonSpecies.name}
-        />
-        <div className="px-2 py-4 rounded-b-xl">
-          <h2 className="text-2xl font-medium capitalize">
-            {pokemonSpecies.name}
-          </h2>
-          <p className="text-[#828282]">#{pokemonSpecies.id}</p>
-          <ul className="capitalize mt-2">
-            {pokemonSpecies.types.map((types) => (
-              <li
-                className={`text-center rounded-md my-2 `}
-                style={{ backgroundColor: typeColorStyles[types.type.name] }}
-                key={types.type.name}
-              >
-                {types.type.name}
+      <section className="flex mt-20 gap-x-10">
+        <div className="border rounded-xl cursor-pointer">
+          <img
+            className=" bg-[#eeeae3] w-[280px] rounded-t-xl"
+            src={pokemonSpecies.sprites.front_default}
+            alt={pokemonSpecies.name}
+          />
+          <div className="px-2 py-4 rounded-b-xl">
+            <h2 className="text-2xl font-medium capitalize">
+              {pokemonSpecies.name}
+            </h2>
+            <p className="text-[#828282]">#{pokemonSpecies.id}</p>
+            <ul className="capitalize mt-2">
+              {pokemonSpecies.types.map((types) => (
+                <li
+                  className={`text-center rounded-md my-2 `}
+                  style={{ backgroundColor: typeColorStyles[types.type.name] }}
+                  key={types.type.name}
+                >
+                  {types.type.name}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+        <div>
+          <div className="flex gap-x-10">
+            <div>
+              <h3>Height</h3>
+              <p>{pokemonSpecies.height / 2} ft</p>
+            </div>
+            <div>
+              <h3>Weight</h3>
+              <p>{pokemonSpecies.weight / 10} lbs</p>
+            </div>
+          </div>
+          <h2 className="font-semibold text-lg mt-6">Base Stats</h2>
+          <ul className="flex flex-col gap-2">
+            {pokemonSpecies.stats.map((stat) => (
+              <li key={stat.stat.name}>
+                {stat.stat.name}: {stat.base_stat}
               </li>
             ))}
           </ul>
         </div>
-      </div>
+      </section>
     );
   }
 
