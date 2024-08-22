@@ -3,7 +3,7 @@ import { getPokemonNames } from "./api";
 
 export const usePokemonNames = () => {
   return useQuery({
-    queryKey: ["pokemon"],
+    queryKey: ["pokemonNames"],
     queryFn: getPokemonNames,
   });
 };

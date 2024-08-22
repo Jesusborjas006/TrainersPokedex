@@ -14,15 +14,20 @@ export const getPokemonNames = async () => {
   const response = await fetch(`${BASE_URL}/pokemon`);
 
   if (!response.ok) {
-    throw new Error("Error fetching data");
+    throw new Error("Error fetching pokemon names");
   }
 
   const data: Pokemon = await response.json();
   return data.results.map((pokemon) => pokemon.name);
 };
 
-// export const getPokemon = async (name: string) => {
-//   const response = await fetch(`${BASE_URL}/pokemon/${name}`);
+export const getPokemon = async (name: string) => {
+  const response = await fetch(`${BASE_URL}/pokemon/${name}`);
 
-//   return response.json();
-// };
+  if (!response.ok) {
+    throw new Error("Error fetching pokemon details");
+  }
+
+  const data = await response.json();
+  return data;
+};
