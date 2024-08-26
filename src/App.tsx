@@ -1,25 +1,16 @@
+import { useQuery } from "@tanstack/react-query";
 import Navbar from "./ui/Navbar";
-import { usePokemonNames } from "./services/queries";
-import { useQueries } from "@tanstack/react-query";
 import { getPokemon } from "./services/api";
 
 function App() {
-  const { data, isPending, isError } = usePokemonNames();
-
-  const pokemonDetails = useQueries({
-    queries: (data ?? [])?.map((pokemon) => {
-      return {
-        queryKey: ["pokemon", pokemon],
-        queryFn: () => getPokemon(pokemon),
-      };
-    }),
+  const { data, status } = useQuery({
+    queryKey: ["pokemon"],
+    queryFn: getPokemon,
   });
 
-  if (isPending) return <span>Loading pokemon data...</span>;
+  if (status === "pending") return <span>Loading Data..</span>;
 
-  if (isError) return <span>Error fetching data</span>;
-
-  console.log(pokemonDetails);
+  if (status === "error") return <span>An error has occurred</span>;
 
   return (
     <>
@@ -28,8 +19,8 @@ function App() {
       </header>
       <main>
         <ul>
-          {data.map((pokemon) => (
-            <li key={pokemon}>{pokemon}</li>
+          {data.results.map((pokemon) => (
+            <li key={pokemon.name}>{pokemon.name}</li>
           ))}
         </ul>
       </main>
