@@ -5,11 +5,11 @@ const PokemonList = () => {
   const pokemon = usePokemon();
   const pokemonDetails = usePokemonDetails(pokemon);
 
-  const areAnyPending = pokemonDetails.every(
+  const areAnyPending = pokemonDetails.some(
     (query) => query.status === "pending"
   );
 
-  const areAnyFailing = pokemonDetails.every(
+  const areAnyFailing = pokemonDetails.some(
     (query) => query.status === "error"
   );
 
