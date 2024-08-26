@@ -1,4 +1,4 @@
-import { Pokemon } from "../types/pokemon";
+import { PokemonType } from "../types/pokemon";
 
 const BASE_URL = "https://pokeapi.co/api/v2";
 
@@ -9,7 +9,7 @@ export const getPokemon = async () => {
     throw new Error("Fetch status is not successful");
   }
 
-  const data: Pokemon = await response.json();
+  const data: PokemonType = await response.json();
   return data;
 };
 

@@ -1,6 +1,6 @@
 import { useQueries, useQuery, UseQueryResult } from "@tanstack/react-query";
 import { getPokemon, getPokemonDetails } from "./api";
-import { Pokemon } from "../types/pokemon";
+import { PokemonType } from "../types/pokemon";
 
 export const usePokemon = () => {
   return useQuery({
@@ -10,7 +10,7 @@ export const usePokemon = () => {
 };
 
 export const usePokemonDetails = (
-  pokemonData: UseQueryResult<Pokemon, Error>
+  pokemonData: UseQueryResult<PokemonType, Error>
 ) => {
   return useQueries({
     queries: (pokemonData.data?.results ?? []).map((pokemon) => {
