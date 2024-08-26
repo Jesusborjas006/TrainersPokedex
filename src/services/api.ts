@@ -12,3 +12,15 @@ export const getPokemon = async () => {
   const data: Pokemon = await response.json();
   return data;
 };
+
+export const getPokemonDetails = async (path: string) => {
+  const response = await fetch(path);
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch pokemon details");
+  }
+
+  const data = await response.json();
+  console.log(data);
+  return data;
+};
