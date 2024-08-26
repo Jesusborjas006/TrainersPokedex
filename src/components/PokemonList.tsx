@@ -1,4 +1,5 @@
 import { usePokemon, usePokemonDetails } from "../services/queries";
+import Pokemon from "./Pokemon";
 
 const PokemonList = () => {
   const pokemon = usePokemon();
@@ -15,26 +16,22 @@ const PokemonList = () => {
   if (areAnyPending) return <span>Loading data...</span>;
   if (areAnyFailing) return <span>Can't load pokemon data</span>;
 
+  const pokemonElements = pokemonDetails.map(
+    (pokemon) =>
+      pokemon.data && (
+        <Pokemon
+          key={pokemon.data.id}
+          id={pokemon.data.id}
+          name={pokemon.data.name}
+          image={pokemon.data.sprites}
+          types={pokemon.data.types}
+        />
+      )
+  );
+
   return (
     <div className="grid grid-cols-4 gap-5 pt-10 text-center px-4">
-      {pokemonDetails.map((pokemon) =>
-        pokemon.data ? (
-          <div
-            className="border cursor-pointer rounded-xl"
-            key={pokemon.data.id}
-          >
-            <img
-              className="mx-auto"
-              src={pokemon.data.sprites}
-              alt={pokemon.data.name}
-            />
-            <p>{pokemon.data.name}</p>
-            {pokemon.data.types.map((type: string[]) => (
-              <p>{type}</p>
-            ))}
-          </div>
-        ) : null
-      )}
+      {pokemonElements}
     </div>
   );
 };
