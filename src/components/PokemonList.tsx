@@ -1,19 +1,23 @@
-import { usePokemon } from "../services/queries";
+import { useQueries } from "@tanstack/react-query";
+import { usePokemon, usePokemonDetails } from "../services/queries";
+import { getPokemonDetails } from "../services/api";
 
 const PokemonList = () => {
-  const { data, status } = usePokemon();
+  const pokemon = usePokemon();
+  const pokemonDetails = usePokemonDetails(pokemon);
 
-  if (status === "pending") return <span>Loading Data..</span>;
-
-  if (status === "error") return <span>An error has occurred</span>;
-
-  return (
-    <div>
-      {data.results.map((pokemon) => (
-        <div key={pokemon.name}>{pokemon.name}</div>
-      ))}
-    </div>
+  const areAnyPending = pokemonDetails.some(
+    (query) => query.status === "pending"
   );
+
+  const areAnyFailing = pokemonDetails.some(
+    (query) => query.status === "error"
+  );
+
+  if (areAnyPending) return <span>Loading data...</span>;
+  if (areAnyFailing) return <span>Can't load pokemon data</span>;
+
+  return <div className="grid grid-cols-4 gap-3 pt-10 text-center"></div>;
 };
 
 export default PokemonList;
