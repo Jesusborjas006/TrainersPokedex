@@ -21,11 +21,14 @@ export const getPokemonDetails = async (path: string) => {
   }
 
   const data = await response.json();
-  const { name, id, sprites } = data;
+  const { name, id, sprites, types } = data;
 
   return {
     name,
     id,
     sprites: sprites.front_default,
+    types: types.map(
+      (typeInfo: { type: { name: string } }) => typeInfo.type.name
+    ),
   };
 };
