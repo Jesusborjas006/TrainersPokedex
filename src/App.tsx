@@ -1,12 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import Navbar from "./ui/Navbar";
 import { getPokemon } from "./services/api";
+import { usePokemon } from "./services/queries";
 
 function App() {
-  const { data, status } = useQuery({
-    queryKey: ["pokemon"],
-    queryFn: getPokemon,
-  });
+  const { data, status } = usePokemon();
 
   if (status === "pending") return <span>Loading Data..</span>;
 
