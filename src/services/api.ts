@@ -13,8 +13,8 @@ export const getPokemon = async () => {
   return data;
 };
 
-export const getPokemonDetails = async (path: string) => {
-  const response = await fetch(path);
+export const getPokemonDetails = async (pokemonName: string) => {
+  const response = await fetch(`${BASE_URL}/pokemon/${pokemonName}`);
 
   if (!response.ok) {
     throw new Error("Failed to fetch pokemon details");

@@ -16,7 +16,7 @@ export const usePokemonDetails = (
     queries: (pokemonData.data?.results ?? []).map((pokemon) => {
       return {
         queryKey: ["pokemon", pokemon.name, "pokemonDetails"],
-        queryFn: () => getPokemonDetails(pokemon.url),
+        queryFn: () => getPokemonDetails(pokemon.name),
       };
     }),
   });
