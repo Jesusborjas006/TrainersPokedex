@@ -1,4 +1,5 @@
-import Navbar from "./components/Navbar";
+import Navbar from "./ui/Navbar";
+import PokemonList from "./components/PokemonList";
 
 function App() {
   return (
@@ -6,7 +7,9 @@ function App() {
       <header>
         <Navbar />
       </header>
-      <main></main>
+      <main>
+        <PokemonList />
+      </main>
     </>
   );
 }
