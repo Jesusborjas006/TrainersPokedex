@@ -1,5 +1,7 @@
 import Navbar from "./ui/Navbar";
 import PokemonList from "./components/PokemonList";
+import { Routes, Route } from "react-router";
+import Details from "./pages/Details";
 
 function App() {
   return (
@@ -8,7 +10,10 @@ function App() {
         <Navbar />
       </header>
       <main>
-        <PokemonList />
+        <Routes>
+          <Route path="/" element={<PokemonList />} />
+          <Route path="/details" element={<Details />} />
+        </Routes>
       </main>
     </>
   );
