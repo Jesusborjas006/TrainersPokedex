@@ -1,10 +1,23 @@
-import { usePokemon, usePokemonDetails } from "../services/queries";
+import { UseQueryResult } from "@tanstack/react-query";
 import Pokemon from "./Pokemon";
 
-const PokemonList = () => {
-  const pokemon = usePokemon();
-  const pokemonDetails = usePokemonDetails(pokemon);
+interface PokemonListProps {
+  pokemonDetails: UseQueryResult<
+    {
+      name: string;
+      id: number;
+      sprites: string;
+      types: string[];
+    },
+    Error
+  >[];
+  setSelectedPokemon: React.Dispatch<React.SetStateAction<string>>;
+}
 
+const PokemonList = ({
+  pokemonDetails,
+  setSelectedPokemon,
+}: PokemonListProps) => {
   const areAnyPending = pokemonDetails.some(
     (query) => query.status === "pending"
   );
@@ -25,6 +38,7 @@ const PokemonList = () => {
           name={pokemon.data.name}
           image={pokemon.data.sprites}
           types={pokemon.data.types}
+          setSelectedPokemon={setSelectedPokemon}
         />
       )
   );

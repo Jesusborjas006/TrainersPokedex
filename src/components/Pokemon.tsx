@@ -5,11 +5,21 @@ interface PokemonProps {
   name: string;
   image: string;
   types: string[];
+  setSelectedPokemon: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const Pokemon = ({ id, name, image, types }: PokemonProps) => {
+const Pokemon = ({
+  id,
+  name,
+  image,
+  types,
+  setSelectedPokemon,
+}: PokemonProps) => {
   return (
-    <div className="border cursor-pointer rounded-xl capitalize">
+    <div
+      className="border cursor-pointer rounded-xl capitalize"
+      onClick={() => setSelectedPokemon(name)}
+    >
       <Link to={name}>
         <img className="mx-auto" src={image} alt={name} />
         <p>{name}</p>
