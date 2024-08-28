@@ -1,6 +1,7 @@
-import { UseQueryResult } from "@tanstack/react-query";
+import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import { useNavigate, useParams } from "react-router-dom";
-import { usePokemonSpecies } from "../services/queries";
+import { usePokemonAbility, usePokemonSpecies } from "../services/queries";
+import { getPokemonAbility } from "../services/api";
 
 interface PokemonProps {
   pokemonDetails: UseQueryResult<
@@ -19,6 +20,10 @@ interface PokemonProps {
           url: string;
         };
       }[];
+      ability: {
+        name: string;
+        url: string;
+      };
     },
     Error
   >[];
@@ -31,8 +36,7 @@ const Details = ({ pokemonDetails }: PokemonProps) => {
     (pokemon) => pokemon.data?.name === pokemonEndpoint.pokemon
   );
   const pokemonSpecies = usePokemonSpecies(pokemonData?.data.name);
-
-  console.log(pokemonData?.data);
+  const pokemonAbility = usePokemonAbility(pokemonData?.data?.ability.url);
 
   if (!pokemonData)
     return (
@@ -59,11 +63,13 @@ const Details = ({ pokemonDetails }: PokemonProps) => {
         </p>
         <ul>
           {pokemonData.data.stats.map((stat) => (
-            <li>
+            <li key={stat.stat.url}>
               {stat.stat.name}: {stat.base_stat}
             </li>
           ))}
         </ul>
+        <p>Ability: {pokemonData.data.ability.name}</p>
+        <p>{pokemonAbility.data?.effect_entries[0].effect}</p>
       </div>
     );
   }

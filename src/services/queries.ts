@@ -1,5 +1,10 @@
 import { useQueries, useQuery, UseQueryResult } from "@tanstack/react-query";
-import { getPokemon, getPokemonDetails, getPokemonSpecies } from "./api";
+import {
+  getPokemon,
+  getPokemonAbility,
+  getPokemonDetails,
+  getPokemonSpecies,
+} from "./api";
 import { PokemonType } from "../types/pokemon";
 
 export const usePokemon = () => {
@@ -27,5 +32,13 @@ export const usePokemonSpecies = (pokemonName: string) => {
     queryKey: ["species", pokemonName],
     queryFn: () => getPokemonSpecies(pokemonName),
     enabled: Boolean(pokemonName),
+  });
+};
+
+export const usePokemonAbility = (path: string) => {
+  return useQuery({
+    queryKey: ["abilities", path],
+    queryFn: () => getPokemonAbility(path),
+    enabled: Boolean(path),
   });
 };
