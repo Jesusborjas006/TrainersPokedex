@@ -8,6 +8,8 @@ interface PokemonProps {
       id: number;
       sprites: string;
       types: string[];
+      height: number;
+      weight: number;
     },
     Error
   >[];
@@ -16,11 +18,12 @@ interface PokemonProps {
 const Details = ({ pokemonDetails }: PokemonProps) => {
   const navigate = useNavigate();
   const pokemonEndpoint = useParams();
-  console.log(pokemonEndpoint.pokemon);
 
   const pokemonData = pokemonDetails.find(
     (pokemon) => pokemon.data?.name === pokemonEndpoint.pokemon
   );
+
+  console.log(pokemonData?.data);
 
   if (!pokemonData)
     return (
@@ -33,6 +36,13 @@ const Details = ({ pokemonDetails }: PokemonProps) => {
         <button onClick={() => navigate(-1)}>Go Back</button>
         <h2>{pokemonData.data.name}</h2>
         <img src={pokemonData.data.sprites} alt={pokemonData.data.name} />
+        <ul>
+          {pokemonData.data.types.map((type) => (
+            <li key={type}>{type}</li>
+          ))}
+        </ul>
+        <p>Height: {pokemonData.data.height}</p>
+        <p>Weight: {pokemonData.data.weight}</p>
       </div>
     );
   }
