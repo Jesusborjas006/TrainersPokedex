@@ -1,6 +1,6 @@
-import { useQuery, UseQueryResult } from "@tanstack/react-query";
+import { UseQueryResult } from "@tanstack/react-query";
 import { useNavigate, useParams } from "react-router-dom";
-import { getPokemonSpecies } from "../services/api";
+import { usePokemonSpecies } from "../services/queries";
 
 interface PokemonProps {
   pokemonDetails: UseQueryResult<
@@ -11,6 +11,14 @@ interface PokemonProps {
       types: string[];
       height: number;
       weight: number;
+      stats: {
+        base_stat: number;
+        effort: number;
+        stat: {
+          name: string;
+          url: string;
+        };
+      }[];
     },
     Error
   >[];
@@ -22,13 +30,9 @@ const Details = ({ pokemonDetails }: PokemonProps) => {
   const pokemonData = pokemonDetails.find(
     (pokemon) => pokemon.data?.name === pokemonEndpoint.pokemon
   );
-  const pokemonSpecies = useQuery({
-    queryKey: ["species", pokemonEndpoint.pokemon],
-    queryFn: () => getPokemonSpecies(pokemonEndpoint.pokemon),
-    enabled: Boolean(pokemonData?.data?.name),
-  });
+  const pokemonSpecies = usePokemonSpecies(pokemonData?.data.name);
 
-  console.log(pokemonSpecies.data);
+  console.log(pokemonData?.data);
 
   if (!pokemonData)
     return (
@@ -50,9 +54,16 @@ const Details = ({ pokemonDetails }: PokemonProps) => {
         <p>Weight: {pokemonData.data.weight}</p>
         <p>Growth Rate: {pokemonSpecies.data?.growth_rate.name}</p>
         <p>
-          Pokedex Entry:{" "}
+          Pokedex Entry:
           {pokemonSpecies.data?.flavor_text_entries[0].flavor_text}
         </p>
+        <ul>
+          {pokemonData.data.stats.map((stat) => (
+            <li>
+              {stat.stat.name}: {stat.base_stat}
+            </li>
+          ))}
+        </ul>
       </div>
     );
   }
