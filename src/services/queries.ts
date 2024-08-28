@@ -21,10 +21,3 @@ export const usePokemonDetails = (
     }),
   });
 };
-
-export const usePokemonName = (name: string) => {
-  return useQuery({
-    queryKey: ["pokemonName", name],
-    queryFn: () => getPokemonDetails(name),
-  });
-};

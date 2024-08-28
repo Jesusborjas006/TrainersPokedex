@@ -21,7 +21,7 @@ export const getPokemonDetails = async (pokemonName: string) => {
   }
 
   const data = await response.json();
-  // console.log(data);
+  console.log(data);
   const { name, id, sprites, types, weight, height } = data;
 
   return {
@@ -34,4 +34,10 @@ export const getPokemonDetails = async (pokemonName: string) => {
     weight,
     height,
   };
+};
+
+export const getPokemonSpecies = async (pokemonName: string) => {
+  const response = await fetch(`${BASE_URL}/pokemon-species/${pokemonName}`);
+  const data = await response.json();
+  return data;
 };
