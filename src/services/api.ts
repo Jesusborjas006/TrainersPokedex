@@ -42,3 +42,10 @@ export const getPokemonSpecies = async (pokemonName: string) => {
   const data = await response.json();
   return data;
 };
+
+export const getPokemonAbility = async (path: string) => {
+  const response = await fetch(path);
+  const data = await response.json();
+  g;
+  return data;
+};
