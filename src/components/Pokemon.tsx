@@ -8,13 +8,7 @@ interface PokemonProps {
   setSelectedPokemon: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const Pokemon = ({
-  id,
-  name,
-  image,
-  types,
-  setSelectedPokemon,
-}: PokemonProps) => {
+const Pokemon = ({ name, image, types, setSelectedPokemon }: PokemonProps) => {
   return (
     <div
       className="border cursor-pointer rounded-xl capitalize"

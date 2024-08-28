@@ -1,7 +1,7 @@
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import { useNavigate, useParams } from "react-router-dom";
 import { usePokemonAbility, usePokemonSpecies } from "../services/queries";
-import { getPokemonAbility } from "../services/api";
+import { getPokemonEvolutions } from "../services/api";
 
 interface PokemonProps {
   pokemonDetails: UseQueryResult<
@@ -38,6 +38,17 @@ const Details = ({ pokemonDetails }: PokemonProps) => {
   const pokemonSpecies = usePokemonSpecies(pokemonData?.data.name);
   const pokemonAbility = usePokemonAbility(pokemonData?.data?.ability.url);
 
+  const pokemonEvolutions = useQuery({
+    queryKey: ["evolutions"],
+    queryFn: () =>
+      getPokemonEvolutions(pokemonSpecies?.data.evolution_chain.url),
+  });
+
+  // console.log(pokemonEvolutions?.data?.chain?.evolves_to[0]);
+  console.log(
+    pokemonEvolutions?.data?.chain.evolves_to[0].evolves_to[0].species.name
+  );
+
   if (!pokemonData)
     return (
       <p className="capitalize">Loading {pokemonEndpoint.pokemon} data...</p>
@@ -70,6 +81,15 @@ const Details = ({ pokemonDetails }: PokemonProps) => {
         </ul>
         <p>Ability: {pokemonData.data.ability.name}</p>
         <p>{pokemonAbility.data?.effect_entries[0].effect}</p>
+        <h2>Evolutions</h2>
+        <p>
+          {pokemonData.data.name} ---=
+          {pokemonEvolutions?.data?.chain?.evolves_to[0].species.name} ---=
+          {
+            pokemonEvolutions?.data?.chain.evolves_to[0].evolves_to[0].species
+              .name
+          }
+        </p>
       </div>
     );
   }
