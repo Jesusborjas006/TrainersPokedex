@@ -6,7 +6,7 @@ interface PokemonListProps {
     {
       name: string;
       id: number;
-      sprites: string;
+      sprites: string[];
       types: string[];
     },
     Error
@@ -36,7 +36,7 @@ const PokemonList = ({
           key={pokemon.data.id}
           id={pokemon.data.id}
           name={pokemon.data.name}
-          image={pokemon.data.sprites}
+          images={pokemon.data.sprites}
           types={pokemon.data.types}
           setSelectedPokemon={setSelectedPokemon}
         />
