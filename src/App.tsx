@@ -18,7 +18,7 @@ function App() {
       <header>
         <Navbar />
       </header>
-      <main>
+      <main className="bg-slate-700 pb-10 min-h-screen">
         <Routes>
           <Route
             path="/"

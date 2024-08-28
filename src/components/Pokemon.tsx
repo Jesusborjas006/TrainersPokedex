@@ -11,11 +11,17 @@ interface PokemonProps {
 const Pokemon = ({ name, images, types, setSelectedPokemon }: PokemonProps) => {
   return (
     <div
-      className="border cursor-pointer rounded-xl capitalize"
+      className="border cursor-pointer rounded-xl capitalize bg-slate-100 py-6"
       onClick={() => setSelectedPokemon(name)}
     >
       <Link to={name}>
-        <img className="mx-auto" src={images[0]} alt={name} />
+        <div className="w-[120px] h-auto mx-auto">
+          <img
+            className="mx-auto bg-gray-300 rounded-full p-2"
+            src={images[0]}
+            alt={name}
+          />
+        </div>
         <p>{name}</p>
         <div className="flex justify-center gap-x-2">
           {types.map((type) => (

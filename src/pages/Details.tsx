@@ -66,14 +66,14 @@ const Details = ({ pokemonDetails }: PokemonProps) => {
   if (pokemonData.data) {
     return (
       <section className="max-w-[1200px] mx-auto">
-        <button className="m-4" onClick={() => navigate(-1)}>
+        <button className="my-6 text-white" onClick={() => navigate(-1)}>
           &larr; Go Back
         </button>
-        <div>
-          <h2 className="text-center capitalize text-2xl font-semibold">
+        <div className="bg-slate-100 py-4 rounded-xl">
+          <h2 className="text-center capitalize text-2xl font-semibold ">
             {pokemonData.data.name}{" "}
             <span className=" font-light">
-              #{formatPokemonId(String(pokemonData.data.id))}
+              | #{formatPokemonId(String(pokemonData.data.id))}
             </span>
           </h2>
           <div className="flex border pt-4">
