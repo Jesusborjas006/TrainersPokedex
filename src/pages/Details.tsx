@@ -1,7 +1,6 @@
-import { useQuery, UseQueryResult } from "@tanstack/react-query";
+import { UseQueryResult } from "@tanstack/react-query";
 import { useNavigate, useParams } from "react-router-dom";
 import { usePokemonAbility, usePokemonSpecies } from "../services/queries";
-import { getPokemonEvolutions } from "../services/api";
 import { formattedPokemonId } from "../utils/utils";
 
 interface PokemonProps {
@@ -38,14 +37,6 @@ const Details = ({ pokemonDetails }: PokemonProps) => {
   );
   const pokemonSpecies = usePokemonSpecies(pokemonData?.data.name);
   const pokemonAbility = usePokemonAbility(pokemonData?.data?.ability.url);
-
-  console.log(pokemonData?.data);
-
-  // const pokemonEvolutions = useQuery({
-  //   queryKey: ["evolutions"],
-  //   queryFn: () =>
-  //     getPokemonEvolutions(pokemonSpecies?.data.evolution_chain.url),
-  // });
 
   if (!pokemonData)
     return (
@@ -95,15 +86,6 @@ const Details = ({ pokemonDetails }: PokemonProps) => {
               </li>
             ))}
           </ul>
-          <h2>Evolutions</h2>
-          {/* <p> */}
-          {/* {pokemonData.data.name} ---= */}
-          {/* {pokemonEvolutions?.data?.chain?.evolves_to[0].species.name} ---= */}
-          {/* {
-              pokemonEvolutions?.data?.chain?.evolves_to[0].evolves_to[0]
-                .species.name
-            } */}
-          {/* </p> */}
         </div>
       </section>
     );

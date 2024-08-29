@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { formattedPokemonId } from "../utils/utils";
+import { TypeColorTypes } from "../types/pokemon";
 
 interface PokemonProps {
   id: number;
@@ -9,7 +10,7 @@ interface PokemonProps {
   setSelectedPokemon: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const typeColors = {
+const typeColors: TypeColorTypes = {
   grass: "#78C850",
   fire: "#F08030",
   water: "#6890F0",
@@ -58,7 +59,7 @@ const Pokemon = ({
           {types.map((type) => (
             <p
               style={{
-                backgroundColor: typeColors[type],
+                backgroundColor: typeColors[type as keyof TypeColorTypes],
                 padding: "2px 0",
                 borderRadius: "4px",
                 display: "inline-block",
