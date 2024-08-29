@@ -2,6 +2,7 @@ import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import { useNavigate, useParams } from "react-router-dom";
 import { usePokemonAbility, usePokemonSpecies } from "../services/queries";
 import { getPokemonEvolutions } from "../services/api";
+import { formattedPokemonId } from "../utils/utils";
 
 interface PokemonProps {
   pokemonDetails: UseQueryResult<
@@ -46,18 +47,6 @@ const Details = ({ pokemonDetails }: PokemonProps) => {
   //     getPokemonEvolutions(pokemonSpecies?.data.evolution_chain.url),
   // });
 
-  const formatPokemonId = (pokemonId: string) => {
-    let formattedId;
-    if (pokemonId.length === 1) {
-      formattedId = `000${pokemonId}`;
-    } else if (pokemonId.length === 2) {
-      formattedId = `00${pokemonId}`;
-    } else if (pokemonId.length === 3) {
-      formattedId = `00${pokemonId}`;
-    }
-    return formattedId;
-  };
-
   if (!pokemonData)
     return (
       <p className="capitalize">Loading {pokemonEndpoint.pokemon} data...</p>
@@ -73,7 +62,7 @@ const Details = ({ pokemonDetails }: PokemonProps) => {
           <h2 className="text-center capitalize text-2xl font-semibold ">
             {pokemonData.data.name}{" "}
             <span className=" font-light">
-              | #{formatPokemonId(String(pokemonData.data.id))}
+              | #{formattedPokemonId(String(pokemonData.data.id))}
             </span>
           </h2>
           <div className="flex border pt-4">

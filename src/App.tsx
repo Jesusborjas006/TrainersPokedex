@@ -6,11 +6,8 @@ import { useState } from "react";
 import { usePokemon, usePokemonDetails } from "./services/queries";
 
 function App() {
-  // Get the pokemons results which is an array of pokemon
   const pokemon = usePokemon();
-  // Uses pokemon and maps over results to create a query endpoint for each pokemon
   const pokemonDetails = usePokemonDetails(pokemon);
-  // State to show which pokemon card was clicked
   const [, setSelectedPokemon] = useState("");
 
   return (
