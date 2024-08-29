@@ -1,7 +1,8 @@
 import { UseQueryResult } from "@tanstack/react-query";
 import { useNavigate, useParams } from "react-router-dom";
 import { usePokemonAbility, usePokemonSpecies } from "../services/queries";
-import { formattedPokemonId } from "../utils/utils";
+import { formattedPokemonId, typeColors } from "../utils/utils";
+import { TypeColorTypes } from "../types/pokemon";
 
 interface PokemonProps {
   pokemonDetails: UseQueryResult<
@@ -49,43 +50,56 @@ const Details = ({ pokemonDetails }: PokemonProps) => {
         <button className="my-6 text-white" onClick={() => navigate(-1)}>
           &larr; Go Back
         </button>
-        <div className="bg-slate-100 py-4 rounded-xl">
-          <h2 className="text-center capitalize text-2xl font-semibold ">
+        <div className="bg-slate-100 py-8 rounded-xl">
+          <h2 className="text-center capitalize text-2xl font-semibold pb-4">
             {pokemonData.data.name}{" "}
             <span className=" font-light">
               | #{formattedPokemonId(String(pokemonData.data.id))}
             </span>
           </h2>
-          <div className="flex border pt-4">
-            <div className="w-[50%] border">
+          <div className="flex w-[90%] justify-center gap-x-6 mx-auto py-4">
+            <div className="w-[35%]">
               <img
-                className="w-full object-cover "
+                className="object-cover bg-gray-300 rounded-lg"
                 src={pokemonData.data.sprites[1]}
                 alt={pokemonData.data.name}
               />
             </div>
-            <div className="border W-[50%]">
+            <div className="w-[55%] space-y-2">
               <p>{pokemonSpecies.data?.flavor_text_entries[0].flavor_text}</p>
-              <h3 className="text-xl font-medium">Types</h3>
-              <ul className="flex gap-x-2 capitalize">
+              <h3 className="text-xl font-medium">Type</h3>
+              <ul className="flex gap-x-2 capitalize text-center text-white">
                 {pokemonData.data.types.map((type) => (
-                  <li key={type}>{type}</li>
+                  <li
+                    style={{
+                      backgroundColor: typeColors[type as keyof TypeColorTypes],
+                      padding: "2px 0",
+                      borderRadius: "4px",
+                      display: "inline-block",
+                      width: "70px",
+                    }}
+                    key={type}
+                  >
+                    {type}
+                  </li>
                 ))}
               </ul>
               <p>Height: {pokemonData.data.height}</p>
               <p>Weight: {pokemonData.data.weight}</p>
               <p>Growth Rate: {pokemonSpecies.data?.growth_rate.name}</p>
-              <p>Ability: {pokemonData.data.ability.name}</p>
+              <p className="capitalize">
+                Ability: {pokemonData.data.ability.name}
+              </p>
               <p>{pokemonAbility.data?.effect_entries[0].effect}</p>
             </div>
           </div>
-          <ul>
+          {/* <ul>
             {pokemonData.data.stats.map((stat) => (
               <li key={stat.stat.url}>
                 {stat.stat.name}: {stat.base_stat}
               </li>
             ))}
-          </ul>
+          </ul> */}
         </div>
       </section>
     );
