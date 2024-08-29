@@ -18,7 +18,7 @@ const Pokemon = ({
 }: PokemonProps) => {
   return (
     <div
-      className="border cursor-pointer rounded-xl capitalize bg-slate-100 py-6"
+      className="border-4 cursor-pointer rounded-xl capitalize bg-slate-100 py-6 hover:border-red-500 "
       onClick={() => setSelectedPokemon(name)}
     >
       <Link to={name}>
