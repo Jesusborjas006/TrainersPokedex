@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router";
 import Details from "./pages/Details";
 import { useState } from "react";
 import { usePokemon, usePokemonDetails } from "./services/queries";
+import Favorites from "./pages/Favorites";
 
 function App() {
   const pokemon = usePokemon();
@@ -30,6 +31,7 @@ function App() {
             path="/:pokemon"
             element={<Details pokemonDetails={pokemonDetails} />}
           />
+          <Route path="pokedex/favorites" element={<Favorites />} />
         </Routes>
       </main>
     </>
