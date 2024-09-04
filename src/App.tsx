@@ -40,7 +40,10 @@ function App() {
             path="/:pokemon"
             element={<Details pokemonDetails={pokemonDetails} />}
           />
-          <Route path="pokedex/favorites" element={<Favorites />} />
+          <Route
+            path="pokedex/favorites"
+            element={<Favorites favorites={favorites} />}
+          />
         </Routes>
       </main>
     </>
