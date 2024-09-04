@@ -1,5 +1,6 @@
 import { UseQueryResult } from "@tanstack/react-query";
 import Pokemon from "./Pokemon";
+import ListGrid from "../layout/ListGrid";
 
 interface PokemonListProps {
   pokemonDetails: UseQueryResult<
@@ -46,11 +47,7 @@ const PokemonList = ({
       )
   );
 
-  return (
-    <div className="grid grid-cols-3 gap-8 pt-10 text-center max-w-[1200px] mx-auto">
-      {pokemonElements}
-    </div>
-  );
+  return <ListGrid>{pokemonElements}</ListGrid>;
 };
 
 export default PokemonList;

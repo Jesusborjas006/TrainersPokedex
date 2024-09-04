@@ -2,6 +2,7 @@ import { useNavigate } from "react-router";
 import { formattedPokemonId, typeColors } from "../utils/utils";
 import { Link } from "react-router-dom";
 import { TypeColorTypes } from "../types/pokemon";
+import ListGrid from "../layout/ListGrid";
 
 interface FavoritesProps {
   favorites: never[];
@@ -22,7 +23,7 @@ const Favorites = ({ favorites }: FavoritesProps) => {
           There's no pokemon that are favorited
         </p>
       ) : (
-        <div className="grid grid-cols-3 gap-8 pt-10 text-center max-w-[1200px] mx-auto">
+        <ListGrid>
           {favorites.map((pokemon) => (
             <div
               key={pokemon.data.id}
@@ -61,7 +62,7 @@ const Favorites = ({ favorites }: FavoritesProps) => {
               </Link>
             </div>
           ))}
-        </div>
+        </ListGrid>
       )}
     </section>
   );
