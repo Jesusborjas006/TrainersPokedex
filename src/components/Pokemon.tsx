@@ -22,6 +22,12 @@ const Pokemon = ({
       className="border-4 cursor-pointer rounded-xl capitalize bg-slate-100 py-6 hover:border-red-600 relative"
       onClick={() => setSelectedPokemon(name)}
     >
+      <button
+        className="border absolute top-2 left-2"
+        onClick={() => console.log("Cliked")}
+      >
+        Favorite
+      </button>
       <p className="absolute right-2 top-2 text-sm text-blue-900">
         #{formattedPokemonId(String(id))}
       </p>
