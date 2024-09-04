@@ -10,6 +10,14 @@ function App() {
   const pokemon = usePokemon();
   const pokemonDetails = usePokemonDetails(pokemon);
   const [, setSelectedPokemon] = useState("");
+  const [favorites, setFavorites] = useState([]);
+
+  const addToFavorites = (pokemonId: number) => {
+    const pokemonFavorited = pokemonDetails.find((pokemon) => {
+      return pokemon.data?.id === pokemonId;
+    });
+    setFavorites([...favorites, pokemonFavorited]);
+  };
 
   return (
     <>
@@ -24,6 +32,7 @@ function App() {
               <PokemonList
                 pokemonDetails={pokemonDetails}
                 setSelectedPokemon={setSelectedPokemon}
+                addToFavorites={addToFavorites}
               />
             }
           />

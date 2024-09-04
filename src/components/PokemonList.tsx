@@ -12,11 +12,13 @@ interface PokemonListProps {
     Error
   >[];
   setSelectedPokemon: React.Dispatch<React.SetStateAction<string>>;
+  addToFavorites: (pokemonId: number) => void;
 }
 
 const PokemonList = ({
   pokemonDetails,
   setSelectedPokemon,
+  addToFavorites,
 }: PokemonListProps) => {
   const areAnyPending = pokemonDetails.some(
     (query) => query.status === "pending"
@@ -39,6 +41,7 @@ const PokemonList = ({
           images={pokemon.data.sprites}
           types={pokemon.data.types}
           setSelectedPokemon={setSelectedPokemon}
+          addToFavorites={addToFavorites}
         />
       )
   );

@@ -8,6 +8,7 @@ interface PokemonProps {
   images: string[];
   types: string[];
   setSelectedPokemon: React.Dispatch<React.SetStateAction<string>>;
+  addToFavorites: (pokemonId: number) => void;
 }
 
 const Pokemon = ({
@@ -16,6 +17,7 @@ const Pokemon = ({
   images,
   types,
   setSelectedPokemon,
+  addToFavorites,
 }: PokemonProps) => {
   return (
     <div
@@ -24,7 +26,7 @@ const Pokemon = ({
     >
       <button
         className="border absolute top-2 left-2"
-        onClick={() => console.log("Cliked")}
+        onClick={() => addToFavorites(id)}
       >
         Favorite
       </button>
