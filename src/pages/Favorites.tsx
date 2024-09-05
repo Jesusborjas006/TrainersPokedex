@@ -10,7 +10,6 @@ interface FavoritesProps {
 }
 
 const Favorites = ({ favorites }: FavoritesProps) => {
-  console.log(favorites.length);
   const navigate = useNavigate();
 
   return (
