@@ -9,7 +9,6 @@ import Favorites from "./pages/Favorites";
 function App() {
   const pokemon = usePokemon();
   const pokemonDetails = usePokemonDetails(pokemon);
-  const [, setSelectedPokemon] = useState("");
   const [favorites, setFavorites] = useState([]);
 
   const addToFavorites = (pokemonId: number) => {
@@ -31,7 +30,6 @@ function App() {
             element={
               <PokemonList
                 pokemonDetails={pokemonDetails}
-                setSelectedPokemon={setSelectedPokemon}
                 addToFavorites={addToFavorites}
               />
             }

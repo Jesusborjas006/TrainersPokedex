@@ -1,39 +1,29 @@
 import { Link } from "react-router-dom";
 import { formattedPokemonId, typeColors } from "../utils/utils";
 import { TypeColorTypes } from "../types/pokemon";
+import Card from "../layouts/Card";
 
 interface PokemonProps {
   id: number;
   name: string;
   images: string[];
   types: string[];
-  setSelectedPokemon: React.Dispatch<React.SetStateAction<string>>;
   addToFavorites: (pokemonId: number) => void;
 }
 
-const Pokemon = ({
-  id,
-  name,
-  images,
-  types,
-  setSelectedPokemon,
-  addToFavorites,
-}: PokemonProps) => {
+const Pokemon = ({ id, name, images, types, addToFavorites }: PokemonProps) => {
   return (
-    <div
-      className="border-4 cursor-pointer rounded-xl capitalize bg-slate-100 py-6 hover:border-red-600 relative"
-      onClick={() => setSelectedPokemon(name)}
-    >
-      <button
-        className="border absolute top-2 left-2"
-        onClick={() => addToFavorites(id)}
-      >
-        Favorite
-      </button>
-      <p className="absolute right-2 top-2 text-sm text-blue-900">
-        #{formattedPokemonId(String(id))}
-      </p>
-      <Link to={name}>
+    <Link to={name}>
+      <Card>
+        <button
+          className="border absolute top-2 left-2 z-10 inline-block"
+          onClick={() => addToFavorites(id)}
+        >
+          Favorite
+        </button>
+        <p className="absolute right-2 top-2 text-sm text-blue-900">
+          #{formattedPokemonId(String(id))}
+        </p>
         <div className="w-[120px] h-auto mx-auto">
           <img
             className="mx-auto bg-gray-300 rounded-full p-2"
@@ -59,8 +49,8 @@ const Pokemon = ({
             </p>
           ))}
         </div>
-      </Link>
-    </div>
+      </Card>
+    </Link>
   );
 };
 
