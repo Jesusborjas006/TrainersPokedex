@@ -30,24 +30,24 @@ const Favorites = ({ favorites }: FavoritesProps) => {
       ) : (
         <ListGrid>
           {favorites.map((pokemon) => (
-            <Card key={pokemon.data.id}>
+            <Card key={pokemon.id}>
               <p className="absolute right-2 top-2 text-sm text-blue-900">
-                #{formattedPokemonId(String(pokemon.data.id))}
+                #{formattedPokemonId(String(pokemon.id))}
               </p>
               <div className="w-[120px] h-auto mx-auto">
-                <Link to={`../${pokemon.data.name}`}>
+                <Link to={`../${pokemon.name}`}>
                   <img
                     className="mx-auto bg-gray-300 p-2 border-2 border-white rounded-full"
-                    src={pokemon.data.sprites[0]}
-                    alt={pokemon.data.name}
+                    src={pokemon.sprites[0]}
+                    alt={pokemon.name}
                   />
                 </Link>
               </div>
               <h3 className="text-lg font-medium hover:underline hover:text-blue-700 inline-block">
-                <Link to={`../${pokemon.data.name}`}>{pokemon.data.name}</Link>
+                <Link to={`../${pokemon.name}`}>{pokemon.name}</Link>
               </h3>
               <div className="flex justify-center gap-x-2 mt-2 text-white">
-                {pokemon.data.types.map((type) => (
+                {pokemon.types.map((type) => (
                   <p
                     style={{
                       backgroundColor: typeColors[type as keyof TypeColorTypes],

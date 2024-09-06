@@ -15,11 +15,14 @@ function App() {
     const pokemonFavorited = pokemonDetails.find((pokemon) => {
       return pokemon.data?.id === pokemonId;
     });
-    const namesInFavorites = favorites.map((pokemon) => pokemon.data.name);
+    const namesInFavorites = favorites.map((pokemon) => pokemon.name);
     const pokemonNameAddedToFav = pokemonFavorited?.data?.name;
 
     if (!namesInFavorites.includes(pokemonNameAddedToFav)) {
-      setFavorites([...favorites, pokemonFavorited]);
+      setFavorites([
+        ...favorites,
+        { ...pokemonFavorited.data, activeStar: true },
+      ]);
     }
     return;
   };
@@ -37,6 +40,7 @@ function App() {
               <PokemonList
                 pokemonDetails={pokemonDetails}
                 addToFavorites={addToFavorites}
+                // favorites={favorites}
               />
             }
           />

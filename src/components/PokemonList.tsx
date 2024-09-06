@@ -15,7 +15,11 @@ interface PokemonListProps {
   addToFavorites: (pokemonId: number) => void;
 }
 
-const PokemonList = ({ pokemonDetails, addToFavorites }: PokemonListProps) => {
+const PokemonList = ({
+  pokemonDetails,
+  addToFavorites,
+  favorites,
+}: PokemonListProps) => {
   const areAnyPending = pokemonDetails.some(
     (query) => query.status === "pending"
   );
@@ -27,6 +31,8 @@ const PokemonList = ({ pokemonDetails, addToFavorites }: PokemonListProps) => {
   if (areAnyPending) return <span>Loading data...</span>;
   if (areAnyFailing) return <span>Can't load pokemon data</span>;
 
+  console.log(pokemonDetails.map((pokemon) => pokemon.data?.activeStar));
+
   const pokemonElements = pokemonDetails.map(
     (pokemon) =>
       pokemon.data && (
@@ -37,10 +43,11 @@ const PokemonList = ({ pokemonDetails, addToFavorites }: PokemonListProps) => {
           images={pokemon.data.sprites}
           types={pokemon.data.types}
           addToFavorites={addToFavorites}
+          activeStar={pokemon.data.activeStar}
+          // favorites={favorites.activeStar}
         />
       )
   );
-
   return <ListGrid>{pokemonElements}</ListGrid>;
 };
 
