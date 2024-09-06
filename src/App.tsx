@@ -15,7 +15,13 @@ function App() {
     const pokemonFavorited = pokemonDetails.find((pokemon) => {
       return pokemon.data?.id === pokemonId;
     });
-    setFavorites([...favorites, pokemonFavorited]);
+    const namesInFavorites = favorites.map((pokemon) => pokemon.data.name);
+    const pokemonNameAddedToFav = pokemonFavorited?.data?.name;
+
+    if (!namesInFavorites.includes(pokemonNameAddedToFav)) {
+      setFavorites([...favorites, pokemonFavorited]);
+    }
+    return;
   };
 
   return (
