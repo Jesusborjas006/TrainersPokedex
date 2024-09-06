@@ -12,17 +12,14 @@ function App() {
   const [favorites, setFavorites] = useState([]);
 
   const addToFavorites = (pokemonId: number) => {
-    const pokemonFavorited = pokemonDetails.find((pokemon) => {
+    const pokemonFavoritedData = pokemonDetails.find((pokemon) => {
       return pokemon.data?.id === pokemonId;
     });
     const namesInFavorites = favorites.map((pokemon) => pokemon.name);
-    const pokemonNameAddedToFav = pokemonFavorited?.data?.name;
+    const pokemonNamesFavorited = pokemonFavoritedData?.data?.name;
 
-    if (!namesInFavorites.includes(pokemonNameAddedToFav)) {
-      setFavorites([
-        ...favorites,
-        { ...pokemonFavorited.data, activeStar: true },
-      ]);
+    if (!namesInFavorites.includes(pokemonNamesFavorited)) {
+      setFavorites([...favorites, pokemonFavoritedData.data]);
     }
     return;
   };
@@ -40,7 +37,7 @@ function App() {
               <PokemonList
                 pokemonDetails={pokemonDetails}
                 addToFavorites={addToFavorites}
-                // favorites={favorites}
+                favorites={favorites}
               />
             }
           />

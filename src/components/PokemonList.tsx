@@ -31,8 +31,6 @@ const PokemonList = ({
   if (areAnyPending) return <span>Loading data...</span>;
   if (areAnyFailing) return <span>Can't load pokemon data</span>;
 
-  console.log(pokemonDetails.map((pokemon) => pokemon.data?.activeStar));
-
   const pokemonElements = pokemonDetails.map(
     (pokemon) =>
       pokemon.data && (
@@ -43,8 +41,7 @@ const PokemonList = ({
           images={pokemon.data.sprites}
           types={pokemon.data.types}
           addToFavorites={addToFavorites}
-          activeStar={pokemon.data.activeStar}
-          // favorites={favorites.activeStar}
+          favorites={favorites}
         />
       )
   );

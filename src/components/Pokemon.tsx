@@ -9,7 +9,6 @@ interface PokemonProps {
   name: string;
   images: string[];
   types: string[];
-  activeStar: boolean;
   addToFavorites: (pokemonId: number) => void;
 }
 
@@ -18,25 +17,24 @@ const Pokemon = ({
   name,
   images,
   types,
-  activeStar,
   addToFavorites,
   favorites,
 }: PokemonProps) => {
-  const [clientStar, setClientStar] = useState(false);
-  const handleClick = () => {
-    // setActiveStar(true);
-    addToFavorites(id);
-  };
-
-  // console.log(`${name} is: ${favorites}`);
+  const favoritedPokemonNames = favorites.map((pokemon) => pokemon.name);
+  let starContent;
+  if (favoritedPokemonNames.includes(name)) {
+    starContent = <span className="text-yellow-400">★</span>;
+  } else {
+    starContent = <span>☆</span>;
+  }
 
   return (
     <Card>
       <button
-        className="absolute top-2 left-2 text-2xl hover:text-yellow-500"
-        onClick={handleClick}
+        className="absolute top-2 left-2 text-4xl hover:text-yellow-500"
+        onClick={() => addToFavorites(id)}
       >
-        {activeStar ? "true" : "false"}
+        {starContent}
       </button>
       <p className="absolute right-2 top-2 text-sm text-blue-900">
         #{formattedPokemonId(String(id))}
