@@ -12,6 +12,11 @@ interface FavoritesProps {
 const Favorites = ({ favorites }: FavoritesProps) => {
   const navigate = useNavigate();
 
+  const removeFromFavorites = (e) => {
+    e.preventDefault();
+    console.log("Deleted");
+  };
+
   return (
     <section className="max-w-[1200px] mx-auto">
       <button className="my-6 text-white" onClick={() => navigate(-1)}>
@@ -29,34 +34,41 @@ const Favorites = ({ favorites }: FavoritesProps) => {
               <p className="absolute right-2 top-2 text-sm text-blue-900">
                 #{formattedPokemonId(String(pokemon.data.id))}
               </p>
-              <Link to={`../${pokemon.data.name}`}>
-                <div className="w-[120px] h-auto mx-auto">
+              <div className="w-[120px] h-auto mx-auto">
+                <Link to={`../${pokemon.data.name}`}>
                   <img
-                    className="mx-auto bg-gray-300 rounded-full p-2"
+                    className="mx-auto bg-gray-300 p-2 border-2 border-white rounded-full"
                     src={pokemon.data.sprites[0]}
                     alt={pokemon.data.name}
                   />
-                </div>
-                <h3 className="text-lg font-medium">{pokemon.data.name}</h3>
-                <div className="flex justify-center gap-x-2 mt-2 text-white">
-                  {pokemon.data.types.map((type) => (
-                    <p
-                      style={{
-                        backgroundColor:
-                          typeColors[type as keyof TypeColorTypes],
-                        padding: "2px 0",
-                        borderRadius: "4px",
-                        display: "inline-block",
-                        fontSize: "14px",
-                        width: "70px",
-                      }}
-                      key={type}
-                    >
-                      {type}
-                    </p>
-                  ))}
-                </div>
-              </Link>
+                </Link>
+              </div>
+              <h3 className="text-lg font-medium hover:underline hover:text-blue-700 inline-block">
+                <Link to={`../${pokemon.data.name}`}>{pokemon.data.name}</Link>
+              </h3>
+              <div className="flex justify-center gap-x-2 mt-2 text-white">
+                {pokemon.data.types.map((type) => (
+                  <p
+                    style={{
+                      backgroundColor: typeColors[type as keyof TypeColorTypes],
+                      padding: "2px 0",
+                      borderRadius: "4px",
+                      display: "inline-block",
+                      fontSize: "14px",
+                      width: "70px",
+                    }}
+                    key={type}
+                  >
+                    {type}
+                  </p>
+                ))}
+              </div>
+              {/* <button
+                  onClick={removeFromFavorites}
+                  className="border absolute block"
+                >
+                  Remove
+                </button> */}
             </Card>
           ))}
         </ListGrid>
