@@ -1,5 +1,6 @@
 import { UseQueryResult } from "@tanstack/react-query";
 import Pokemon from "./Pokemon";
+import ListGrid from "../layouts/ListGrid";
 
 interface PokemonListProps {
   pokemonDetails: UseQueryResult<
@@ -11,12 +12,33 @@ interface PokemonListProps {
     },
     Error
   >[];
-  setSelectedPokemon: React.Dispatch<React.SetStateAction<string>>;
+  addToFavorites: (pokemonId: number) => void;
+  favorites: {
+    name: string;
+    id: number;
+    sprites: string[];
+    types: string[];
+    weight: number;
+    height: number;
+    stats: {
+      base_stat: number;
+      effort: number;
+      stat: {
+        name: string;
+        url: string;
+      };
+    }[];
+    ability: {
+      name: string;
+      url: string;
+    };
+  }[];
 }
 
 const PokemonList = ({
   pokemonDetails,
-  setSelectedPokemon,
+  addToFavorites,
+  favorites,
 }: PokemonListProps) => {
   const areAnyPending = pokemonDetails.some(
     (query) => query.status === "pending"
@@ -38,16 +60,12 @@ const PokemonList = ({
           name={pokemon.data.name}
           images={pokemon.data.sprites}
           types={pokemon.data.types}
-          setSelectedPokemon={setSelectedPokemon}
+          addToFavorites={addToFavorites}
+          favorites={favorites}
         />
       )
   );
-
-  return (
-    <div className="grid grid-cols-3 gap-8 pt-10 text-center max-w-[1200px] mx-auto">
-      {pokemonElements}
-    </div>
-  );
+  return <ListGrid>{pokemonElements}</ListGrid>;
 };
 
 export default PokemonList;
