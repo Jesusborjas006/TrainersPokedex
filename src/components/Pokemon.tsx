@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import { formattedPokemonId, typeColors } from "../utils/utils";
 import { TypeColorTypes } from "../types/pokemon";
 import Card from "../layouts/Card";
-import { useState } from "react";
 
 interface PokemonProps {
   id: number;
@@ -10,6 +9,26 @@ interface PokemonProps {
   images: string[];
   types: string[];
   addToFavorites: (pokemonId: number) => void;
+  favorites: {
+    name: string;
+    id: number;
+    sprites: string[];
+    types: string[];
+    weight: number;
+    height: number;
+    stats: {
+      base_stat: number;
+      effort: number;
+      stat: {
+        name: string;
+        url: string;
+      };
+    }[];
+    ability: {
+      name: string;
+      url: string;
+    };
+  }[];
 }
 
 const Pokemon = ({
@@ -73,16 +92,3 @@ const Pokemon = ({
 };
 
 export default Pokemon;
-
-{
-  /* <button
-        className="absolute top-2 left-2 text-4xl hover:text-yellow-500 "
-        onClick={handleClick}
-      >
-        {activeStar ? (
-          <span className="text-yellow-400">★</span>
-        ) : (
-          <span>☆</span>
-        )}
-      </button> */
-}

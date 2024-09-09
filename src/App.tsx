@@ -11,6 +11,8 @@ function App() {
   const pokemonDetails = usePokemonDetails(pokemon);
   const [favorites, setFavorites] = useState([]);
 
+  console.log(favorites);
+
   const addToFavorites = (pokemonId: number) => {
     const pokemonFavoritedData = pokemonDetails.find((pokemon) => {
       return pokemon.data?.id === pokemonId;
@@ -47,7 +49,9 @@ function App() {
           />
           <Route
             path="pokedex/favorites"
-            element={<Favorites favorites={favorites} />}
+            element={
+              <Favorites favorites={favorites} setFavorites={setFavorites} />
+            }
           />
         </Routes>
       </main>
@@ -56,3 +60,7 @@ function App() {
 }
 
 export default App;
+
+// Be able to delete from favs
+// Typescrupt types
+// Add favorite state in details

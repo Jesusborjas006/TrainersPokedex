@@ -7,14 +7,18 @@ import Card from "../layouts/Card";
 
 interface FavoritesProps {
   favorites: never[];
+  setFavorites: React.Dispatch<React.SetStateAction<never[]>>;
 }
 
-const Favorites = ({ favorites }: FavoritesProps) => {
+const Favorites = ({ favorites, setFavorites }: FavoritesProps) => {
   const navigate = useNavigate();
 
-  const removeFromFavorites = (e) => {
-    e.preventDefault();
+  const removeFromFavorites = (pokemonId: number) => {
     console.log("Deleted");
+    const updatedFavorites = favorites.filter((pokemon) => {
+      return pokemon.id !== pokemonId;
+    });
+    setFavorites(updatedFavorites);
   };
 
   return (
@@ -63,12 +67,12 @@ const Favorites = ({ favorites }: FavoritesProps) => {
                   </p>
                 ))}
               </div>
-              {/* <button
-                  onClick={removeFromFavorites}
-                  className="border absolute block"
-                >
-                  Remove
-                </button> */}
+              <button
+                onClick={() => removeFromFavorites(pokemon.id)}
+                className="border absolute block"
+              >
+                Remove
+              </button>
             </Card>
           ))}
         </ListGrid>

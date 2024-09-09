@@ -28,3 +28,26 @@ export interface TypeColorTypes {
   steel: string;
   flying: string;
 }
+
+export interface PokemonFavoriteTypes {
+  favorites: {
+    name: string;
+    id: number;
+    sprites: string[];
+    types: string[];
+    weight: number;
+    height: number;
+    stats: {
+      base_stat: number;
+      effort: number;
+      stat: {
+        name: string;
+        url: string;
+      };
+    }[];
+    ability: {
+      name: string;
+      url: string;
+    };
+  }[];
+}
