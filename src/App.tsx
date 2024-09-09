@@ -31,6 +31,8 @@ function App() {
     setFavorites(updatedFavorites);
   };
 
+  console.log(pokemon.data);
+
   return (
     <>
       <header>
