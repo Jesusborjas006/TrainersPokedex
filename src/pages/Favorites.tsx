@@ -7,19 +7,11 @@ import Card from "../layouts/Card";
 
 interface FavoritesProps {
   favorites: never[];
-  setFavorites: React.Dispatch<React.SetStateAction<never[]>>;
+  removeFromFavorites: (pokemonId: number) => void;
 }
 
-const Favorites = ({ favorites, setFavorites }: FavoritesProps) => {
+const Favorites = ({ favorites, removeFromFavorites }: FavoritesProps) => {
   const navigate = useNavigate();
-
-  const removeFromFavorites = (pokemonId: number) => {
-    console.log("Deleted");
-    const updatedFavorites = favorites.filter((pokemon) => {
-      return pokemon.id !== pokemonId;
-    });
-    setFavorites(updatedFavorites);
-  };
 
   return (
     <section className="max-w-[1200px] mx-auto">
@@ -28,8 +20,8 @@ const Favorites = ({ favorites, setFavorites }: FavoritesProps) => {
       </button>
       <h3 className="text-white text-center text-2xl">Favorites</h3>
       {favorites.length <= 0 ? (
-        <p className="text-white text-center">
-          There's no pokemon that are favorited
+        <p className="text-white text-center pt-10">
+          No favorited Pokemon to display.
         </p>
       ) : (
         <ListGrid>
@@ -41,7 +33,7 @@ const Favorites = ({ favorites, setFavorites }: FavoritesProps) => {
               <div className="w-[120px] h-auto mx-auto">
                 <Link to={`../${pokemon.name}`}>
                   <img
-                    className="mx-auto bg-gray-300 p-2 border-2 border-white rounded-full"
+                    className="mx-auto bg-gray-300 p-2 border-2 border-white rounded-full hover:bg-green-200"
                     src={pokemon.sprites[0]}
                     alt={pokemon.name}
                   />
@@ -69,7 +61,7 @@ const Favorites = ({ favorites, setFavorites }: FavoritesProps) => {
               </div>
               <button
                 onClick={() => removeFromFavorites(pokemon.id)}
-                className="border absolute block"
+                className="border relative top-4 px-2 py-1 bg-red-700 text-white hover:bg-red-500 text-sm rounded-mg"
               >
                 Remove
               </button>

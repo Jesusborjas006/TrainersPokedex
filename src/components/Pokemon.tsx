@@ -42,7 +42,7 @@ const Pokemon = ({
   const favoritedPokemonNames = favorites.map((pokemon) => pokemon.name);
   let starContent;
   if (favoritedPokemonNames.includes(name)) {
-    starContent = <span className="text-yellow-400">★</span>;
+    starContent = <span className="text-yellow-400 cursor-default">★</span>;
   } else {
     starContent = <span>☆</span>;
   }
@@ -61,7 +61,7 @@ const Pokemon = ({
       <div className="w-[120px] h-auto mx-auto">
         <Link to={name}>
           <img
-            className="mx-auto bg-gray-300 p-2 border-2 border-white rounded-full"
+            className="mx-auto bg-gray-300 p-2 border-2 border-white rounded-full hover:bg-green-200"
             src={images[0]}
             alt={name}
           />
