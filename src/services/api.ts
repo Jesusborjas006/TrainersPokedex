@@ -14,10 +14,8 @@ import { PokemonType } from "../types/pokemon";
 
 const BASE_URL = "https://pokeapi.co/api/v2";
 
-export const getPokemon = async (offset = 0, limit = 151) => {
-  const response = await fetch(
-    `${BASE_URL}/pokemon?offset=${offset}&limit=${limit}`
-  );
+export const getPokemon = async (startId: number) => {
+  const response = await fetch(`${BASE_URL}/pokemon?offset=${startId}&limit=3`);
 
   if (!response.ok) {
     throw new Error("Fetch status is not successful");

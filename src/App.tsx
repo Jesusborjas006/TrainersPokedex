@@ -7,7 +7,8 @@ import { usePokemon, usePokemonDetails } from "./services/queries";
 import Favorites from "./pages/Favorites";
 
 function App() {
-  const pokemon = usePokemon();
+  const [pokemonStartId, setPokemonStartId] = useState(0);
+  const pokemon = usePokemon(pokemonStartId);
   const pokemonDetails = usePokemonDetails(pokemon);
   const [favorites, setFavorites] = useState([]);
 
@@ -31,13 +32,19 @@ function App() {
     setFavorites(updatedFavorites);
   };
 
-  console.log(pokemon.data);
-
   return (
     <>
-      <header>
-        <Navbar />
-      </header>
+      <header>{<Navbar />}</header>
+      <div className="flex">
+        <select
+          value={pokemonStartId}
+          onChange={(e) => setPokemonStartId(e.target.value)}
+        >
+          <option value={0}>Generation One</option>
+          <option value={151}>Generation two</option>
+        </select>
+      </div>
+
       <main className="bg-slate-700 pb-10 min-h-screen">
         <Routes>
           <Route
