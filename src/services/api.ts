@@ -1,17 +1,5 @@
 import { PokemonType } from "../types/pokemon";
 
-// GEN 1 - 151
-// GEN 2 - 100
-// GEN 3 - 135
-// GEN 4 - 107
-// GEN 5 - 156
-// GEN 6 - 72
-// GEN 7 - 88
-// GEN 8 - 96
-// GEN 9 - 120
-
-// Need a limit for each generation and the offset of which is next. The last number of prev generation
-
 const BASE_URL = "https://pokeapi.co/api/v2";
 
 export const getPokemon = async (startId: number, limit: number) => {

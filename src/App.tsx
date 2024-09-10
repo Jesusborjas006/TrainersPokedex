@@ -52,6 +52,13 @@ function App() {
         >
           <option value={"0-151"}>Generation One</option>
           <option value={"151-100"}>Generation two</option>
+          <option value={"251-135"}>Generation Three</option>
+          <option value={"386-107"}>Generation Four</option>
+          <option value={"493-156"}>Generation Five</option>
+          <option value={"649-72"}>Generation Six</option>
+          <option value={"721-88"}>Generation Seven</option>
+          <option value={"809-96"}>Generation Eight</option>
+          <option value={"905-120"}>Generation Nine</option>
         </select>
       </div>
 
