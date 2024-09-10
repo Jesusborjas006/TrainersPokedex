@@ -2,11 +2,13 @@ import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <nav className="bg-red-500 text-white px-10 py-4 flex items-end justify-between">
-      <h2 className="text-2xl">Trainers Pokedex</h2>
-      <NavLink to="pokedex/favorites" className="text-xl">
-        Favorites
-      </NavLink>
+    <nav className="bg-red-500 text-white px-10 py-2">
+      <div className="max-w-[1200px] flex items-end justify-between mx-auto">
+        <h2 className="text-xl">Trainers Pokedex</h2>
+        <NavLink to="pokedex/favorites" className="text-xl">
+          Favorites
+        </NavLink>
+      </div>
     </nav>
   );
 };
