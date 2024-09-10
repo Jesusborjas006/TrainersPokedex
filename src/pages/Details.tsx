@@ -41,7 +41,9 @@ const Details = ({ pokemonDetails }: PokemonProps) => {
 
   if (!pokemonData)
     return (
-      <p className="capitalize">Loading {pokemonEndpoint.pokemon} data...</p>
+      <p className="text-white text-center pt-10 capitalize">
+        Loading {pokemonEndpoint.pokemon} data...
+      </p>
     );
 
   if (pokemonData.data) {

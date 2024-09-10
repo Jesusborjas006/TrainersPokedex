@@ -7,10 +7,10 @@ import {
 } from "./api";
 import { PokemonType } from "../types/pokemon";
 
-export const usePokemon = () => {
+export const usePokemon = (startId: number, limit: number) => {
   return useQuery({
-    queryKey: ["pokemon"],
-    queryFn: getPokemon,
+    queryKey: ["pokemon", { startId, limit }],
+    queryFn: () => getPokemon(startId, limit),
   });
 };
 

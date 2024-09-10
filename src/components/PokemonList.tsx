@@ -48,7 +48,10 @@ const PokemonList = ({
     (query) => query.status === "error"
   );
 
-  if (areAnyPending) return <span>Loading data...</span>;
+  if (areAnyPending)
+    return (
+      <p className="text-white text-center text-lg pt-10">Loading data...</p>
+    );
   if (areAnyFailing) return <span>Can't load pokemon data</span>;
 
   const pokemonElements = pokemonDetails.map(

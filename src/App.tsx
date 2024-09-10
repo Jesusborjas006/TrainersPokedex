@@ -5,9 +5,15 @@ import Details from "./pages/Details";
 import { useState } from "react";
 import { usePokemon, usePokemonDetails } from "./services/queries";
 import Favorites from "./pages/Favorites";
+import SelectGeneration from "./components/SelectGeneration";
 
 function App() {
-  const pokemon = usePokemon();
+  const [pokemonQuery, setPokemonQuery] = useState({
+    startId: 0,
+    limit: 151,
+    region: "Kanto",
+  });
+  const pokemon = usePokemon(pokemonQuery.startId, pokemonQuery.limit);
   const pokemonDetails = usePokemonDetails(pokemon);
   const [favorites, setFavorites] = useState([]);
 
@@ -33,19 +39,23 @@ function App() {
 
   return (
     <>
-      <header>
-        <Navbar />
-      </header>
+      <header>{<Navbar />}</header>
       <main className="bg-slate-700 pb-10 min-h-screen">
         <Routes>
           <Route
             path="/"
             element={
-              <PokemonList
-                pokemonDetails={pokemonDetails}
-                addToFavorites={addToFavorites}
-                favorites={favorites}
-              />
+              <>
+                <SelectGeneration
+                  pokemonQuery={pokemonQuery}
+                  setPokemonQuery={setPokemonQuery}
+                />
+                <PokemonList
+                  pokemonDetails={pokemonDetails}
+                  addToFavorites={addToFavorites}
+                  favorites={favorites}
+                />
+              </>
             }
           />
           <Route
