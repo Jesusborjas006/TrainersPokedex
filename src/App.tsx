@@ -16,6 +16,7 @@ function App() {
   const pokemon = usePokemon(pokemonQuery.startId, pokemonQuery.limit);
   const pokemonDetails = usePokemonDetails(pokemon);
   const [favorites, setFavorites] = useState([]);
+  const [searchInput, setSearchInput] = useState("");
 
   const addToFavorites = (pokemonId: number) => {
     const pokemonFavoritedData = pokemonDetails.find((pokemon) => {
@@ -40,6 +41,12 @@ function App() {
   return (
     <>
       <header>{<Navbar />}</header>
+      <input
+        className="border absolute left-10"
+        type="text"
+        placeholder="search"
+        onChange={(e) => setSearchInput(e.target.value)}
+      />
       <main className="bg-slate-700 pb-10 min-h-screen">
         <Routes>
           <Route
@@ -54,6 +61,7 @@ function App() {
                   pokemonDetails={pokemonDetails}
                   addToFavorites={addToFavorites}
                   favorites={favorites}
+                  searchInput={searchInput}
                 />
               </>
             }

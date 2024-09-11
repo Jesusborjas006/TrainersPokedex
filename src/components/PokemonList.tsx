@@ -33,12 +33,14 @@ interface PokemonListProps {
       url: string;
     };
   }[];
+  searchInput: string;
 }
 
 const PokemonList = ({
   pokemonDetails,
   addToFavorites,
   favorites,
+  searchInput,
 }: PokemonListProps) => {
   const areAnyPending = pokemonDetails.some(
     (query) => query.status === "pending"
@@ -54,7 +56,11 @@ const PokemonList = ({
     );
   if (areAnyFailing) return <span>Can't load pokemon data</span>;
 
-  const pokemonElements = pokemonDetails.map(
+  const searchedPokemon = pokemonDetails.filter((pokemon) => {
+    return pokemon.data?.name.includes(searchInput);
+  });
+
+  const pokemonElements = searchedPokemon.map(
     (pokemon) =>
       pokemon.data && (
         <Pokemon
@@ -68,6 +74,7 @@ const PokemonList = ({
         />
       )
   );
+  console.log("Details Pokemon Default: ", pokemonDetails);
   return <ListGrid>{pokemonElements}</ListGrid>;
 };
 
