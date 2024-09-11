@@ -41,12 +41,7 @@ function App() {
   return (
     <>
       <header>{<Navbar />}</header>
-      <input
-        className="border absolute left-10"
-        type="text"
-        placeholder="search"
-        onChange={(e) => setSearchInput(e.target.value)}
-      />
+
       <main className="bg-slate-700 pb-10 min-h-screen">
         <Routes>
           <Route
@@ -57,6 +52,15 @@ function App() {
                   pokemonQuery={pokemonQuery}
                   setPokemonQuery={setPokemonQuery}
                 />
+                <div className="flex justify-center mt-10 space-x-2">
+                  <label className="text-white">Search Pokemon:</label>
+                  <input
+                    className="border flex px-1 rounded-sm"
+                    type="text"
+                    placeholder="Pokemon ID or Name"
+                    onChange={(e) => setSearchInput(e.target.value)}
+                  />
+                </div>
                 <PokemonList
                   pokemonDetails={pokemonDetails}
                   addToFavorites={addToFavorites}

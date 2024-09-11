@@ -74,7 +74,6 @@ const PokemonList = ({
         />
       )
   );
-  console.log("Details Pokemon Default: ", pokemonDetails);
   return <ListGrid>{pokemonElements}</ListGrid>;
 };
 
