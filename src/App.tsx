@@ -6,6 +6,7 @@ import { useState } from "react";
 import { usePokemon, usePokemonDetails } from "./services/queries";
 import Favorites from "./pages/Favorites";
 import SelectGeneration from "./components/SelectGeneration";
+import SearchBar from "./components/SearchBar";
 
 function App() {
   const [pokemonQuery, setPokemonQuery] = useState({
@@ -16,6 +17,7 @@ function App() {
   const pokemon = usePokemon(pokemonQuery.startId, pokemonQuery.limit);
   const pokemonDetails = usePokemonDetails(pokemon);
   const [favorites, setFavorites] = useState([]);
+  const [searchInput, setSearchInput] = useState("");
 
   const addToFavorites = (pokemonId: number) => {
     const pokemonFavoritedData = pokemonDetails.find((pokemon) => {
@@ -40,6 +42,7 @@ function App() {
   return (
     <>
       <header>{<Navbar />}</header>
+
       <main className="bg-slate-700 pb-10 min-h-screen">
         <Routes>
           <Route
@@ -50,10 +53,12 @@ function App() {
                   pokemonQuery={pokemonQuery}
                   setPokemonQuery={setPokemonQuery}
                 />
+                <SearchBar setSearchInput={setSearchInput} />
                 <PokemonList
                   pokemonDetails={pokemonDetails}
                   addToFavorites={addToFavorites}
                   favorites={favorites}
+                  searchInput={searchInput}
                 />
               </>
             }
