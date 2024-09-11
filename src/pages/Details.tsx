@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { usePokemonAbility, usePokemonSpecies } from "../services/queries";
 import { formattedPokemonId, typeColors } from "../utils/utils";
 import { TypeColorTypes } from "../types/pokemon";
+import StatsBar from "../components/StatsBar";
 
 interface PokemonProps {
   pokemonDetails: UseQueryResult<
@@ -38,6 +39,15 @@ const Details = ({ pokemonDetails }: PokemonProps) => {
   );
   const pokemonSpecies = usePokemonSpecies(pokemonData?.data.name);
   const pokemonAbility = usePokemonAbility(pokemonData?.data?.ability.url);
+
+  const pokemonStats = pokemonData?.data?.stats;
+
+  const formattedStats = pokemonStats?.map((stat) => {
+    return {
+      ...stat,
+      stat: stat.stat.name,
+    };
+  });
 
   if (!pokemonData)
     return (
@@ -95,13 +105,12 @@ const Details = ({ pokemonDetails }: PokemonProps) => {
               <p>{pokemonAbility.data?.effect_entries[0].effect}</p>
             </div>
           </div>
-          {/* <ul>
-            {pokemonData.data.stats.map((stat) => (
-              <li key={stat.stat.url}>
-                {stat.stat.name}: {stat.base_stat}
-              </li>
-            ))}
-          </ul> */}
+          <div className="h-[500px] mt-20 ">
+            <h3 className="text-center text-xl font-medium">
+              Pokemon Base Stats
+            </h3>
+            <StatsBar formattedStats={formattedStats} />
+          </div>
         </div>
       </section>
     );

@@ -53,7 +53,10 @@ function App() {
                   pokemonQuery={pokemonQuery}
                   setPokemonQuery={setPokemonQuery}
                 />
-                <SearchBar setSearchInput={setSearchInput} />
+                <SearchBar
+                  searchInput={searchInput}
+                  setSearchInput={setSearchInput}
+                />
                 <PokemonList
                   pokemonDetails={pokemonDetails}
                   addToFavorites={addToFavorites}

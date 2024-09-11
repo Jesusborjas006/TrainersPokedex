@@ -1,8 +1,9 @@
 interface SearchBarProps {
+  searchInput: string;
   setSearchInput: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const SearchBar = ({ setSearchInput }: SearchBarProps) => {
+const SearchBar = ({ searchInput, setSearchInput }: SearchBarProps) => {
   return (
     <div className="flex justify-center mt-10 space-x-2">
       <label className="text-white">Search Pokemon:</label>
@@ -11,6 +12,7 @@ const SearchBar = ({ setSearchInput }: SearchBarProps) => {
         type="text"
         placeholder="Enter Pokemon name..."
         onChange={(e) => setSearchInput(e.target.value)}
+        value={searchInput}
       />
     </div>
   );
