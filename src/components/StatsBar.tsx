@@ -1,58 +1,56 @@
-import { BarChart, Bar, ResponsiveContainer } from "recharts";
-const data = [
-  {
-    name: "Page A",
-    uv: 4000,
-    pv: 2400,
-    amt: 2400,
-  },
-  {
-    name: "Page B",
-    uv: 3000,
-    pv: 1398,
-    amt: 2210,
-  },
-  {
-    name: "Page C",
-    uv: 2000,
-    pv: 9800,
-    amt: 2290,
-  },
-  {
-    name: "Page D",
-    uv: 2780,
-    pv: 3908,
-    amt: 2000,
-  },
-  {
-    name: "Page E",
-    uv: 1890,
-    pv: 4800,
-    amt: 2181,
-  },
-  {
-    name: "Page F",
-    uv: 2390,
-    pv: 3800,
-    amt: 2500,
-  },
-  {
-    name: "Page G",
-    uv: 3490,
-    pv: 4300,
-    amt: 2100,
-  },
-];
+import { useEffect, useState } from "react";
+import { BarChart, Bar, ResponsiveContainer, XAxis, YAxis } from "recharts";
 
-const StatsBar = () => {
+interface StatsBarProps {
+  formattedStats:
+    | {
+        stat: string;
+        base_stat: number;
+        effort: number;
+      }[]
+    | undefined;
+}
+
+const StatsBar = ({ formattedStats }: StatsBarProps) => {
+  const [labelAngle, setLabelAngle] = useState(0);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 630) {
+        setLabelAngle(-45);
+      } else {
+        setLabelAngle(0);
+      }
+    };
+
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
-    <div className="h-[500px] w-[500px] border border-red-600">
-      <ResponsiveContainer width="100%" height="100%">
-        <BarChart width={150} height={40} data={data}>
-          <Bar dataKey="uv" fill="#8884d8" />
-        </BarChart>
-      </ResponsiveContainer>
-    </div>
+    <ResponsiveContainer
+      width="100%"
+      height="100%"
+      className="mx-auto relative"
+    >
+      <BarChart
+        data={formattedStats}
+        margin={{ bottom: 70 }}
+        className="pb-10 text-xs md:text-sm lg:text-base"
+      >
+        <Bar dataKey="base_stat" fill="#8884d8" />
+        <XAxis
+          dataKey="stat"
+          angle={labelAngle}
+          textAnchor={labelAngle ? "end" : "middle"}
+          interval={0}
+        />
+        <YAxis dataKey="base_stat" domain={[0, 200]} />
+      </BarChart>
+    </ResponsiveContainer>
   );
 };
 

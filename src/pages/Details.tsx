@@ -3,8 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { usePokemonAbility, usePokemonSpecies } from "../services/queries";
 import { formattedPokemonId, typeColors } from "../utils/utils";
 import { TypeColorTypes } from "../types/pokemon";
-// import StatsBar from "../components/StatsBar";
-import { BarChart, Bar, ResponsiveContainer, XAxis, YAxis } from "recharts";
+import StatsBar from "../components/StatsBar";
 
 interface PokemonProps {
   pokemonDetails: UseQueryResult<
@@ -49,7 +48,6 @@ const Details = ({ pokemonDetails }: PokemonProps) => {
       stat: stat.stat.name,
     };
   });
-  console.log(formattedStats);
 
   if (!pokemonData)
     return (
@@ -105,20 +103,13 @@ const Details = ({ pokemonDetails }: PokemonProps) => {
                 Ability: {pokemonData.data.ability.name}
               </p>
               <p>{pokemonAbility.data?.effect_entries[0].effect}</p>
-
-              <h3 className="text-center font-semibold text-xl pt-10">
-                Pokemon Base Stats
-              </h3>
-              <div className="h-[350px] w-full">
-                <ResponsiveContainer width="100%" height="100%">
-                  <BarChart height={10} width={10} data={formattedStats}>
-                    <Bar dataKey="base_stat" fill="#8884d8" />
-                    <XAxis dataKey="stat" className="text-sm" />
-                    <YAxis dataKey="base_stat" className="text-xs" />
-                  </BarChart>
-                </ResponsiveContainer>
-              </div>
             </div>
+          </div>
+          <div className="h-[500px] mt-20 ">
+            <h3 className="text-center text-xl font-medium">
+              Pokemon Base Stats
+            </h3>
+            <StatsBar formattedStats={formattedStats} />
           </div>
         </div>
       </section>
