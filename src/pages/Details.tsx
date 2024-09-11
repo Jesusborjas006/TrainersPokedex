@@ -39,6 +39,8 @@ const Details = ({ pokemonDetails }: PokemonProps) => {
   const pokemonSpecies = usePokemonSpecies(pokemonData?.data.name);
   const pokemonAbility = usePokemonAbility(pokemonData?.data?.ability.url);
 
+  console.log(pokemonData?.data);
+
   if (!pokemonData)
     return (
       <p className="text-white text-center pt-10 capitalize">
@@ -93,15 +95,18 @@ const Details = ({ pokemonDetails }: PokemonProps) => {
                 Ability: {pokemonData.data.ability.name}
               </p>
               <p>{pokemonAbility.data?.effect_entries[0].effect}</p>
+              <h3 className="text-center font-semibold text-xl pt-10">
+                Pokemon Base Stats
+              </h3>
+              <ul className="flex flex-col justify-center border">
+                {pokemonData.data.stats.map((stat) => (
+                  <li className="capitalize" key={stat.stat.url}>
+                    {stat.stat.name}: {stat.base_stat}
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
-          {/* <ul>
-            {pokemonData.data.stats.map((stat) => (
-              <li key={stat.stat.url}>
-                {stat.stat.name}: {stat.base_stat}
-              </li>
-            ))}
-          </ul> */}
         </div>
       </section>
     );
