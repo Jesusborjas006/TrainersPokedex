@@ -3,6 +3,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { usePokemonAbility, usePokemonSpecies } from "../services/queries";
 import { formattedPokemonId, typeColors } from "../utils/utils";
 import { TypeColorTypes } from "../types/pokemon";
+// import StatsBar from "../components/StatsBar";
+import { BarChart, Bar, ResponsiveContainer, XAxis, YAxis } from "recharts";
 
 interface PokemonProps {
   pokemonDetails: UseQueryResult<
@@ -39,7 +41,15 @@ const Details = ({ pokemonDetails }: PokemonProps) => {
   const pokemonSpecies = usePokemonSpecies(pokemonData?.data.name);
   const pokemonAbility = usePokemonAbility(pokemonData?.data?.ability.url);
 
-  console.log(pokemonData?.data);
+  const pokemonStats = pokemonData?.data?.stats;
+
+  const formattedStats = pokemonStats?.map((stat) => {
+    return {
+      ...stat,
+      stat: stat.stat.name,
+    };
+  });
+  console.log(formattedStats);
 
   if (!pokemonData)
     return (
@@ -95,16 +105,19 @@ const Details = ({ pokemonDetails }: PokemonProps) => {
                 Ability: {pokemonData.data.ability.name}
               </p>
               <p>{pokemonAbility.data?.effect_entries[0].effect}</p>
+
               <h3 className="text-center font-semibold text-xl pt-10">
                 Pokemon Base Stats
               </h3>
-              <ul className="flex flex-col justify-center border">
-                {pokemonData.data.stats.map((stat) => (
-                  <li className="capitalize" key={stat.stat.url}>
-                    {stat.stat.name}: {stat.base_stat}
-                  </li>
-                ))}
-              </ul>
+              <div className="h-[350px] w-full">
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart height={10} width={10} data={formattedStats}>
+                    <Bar dataKey="base_stat" fill="#8884d8" />
+                    <XAxis dataKey="stat" className="text-sm" />
+                    <YAxis dataKey="base_stat" className="text-xs" />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
             </div>
           </div>
         </div>
