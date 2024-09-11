@@ -6,6 +6,7 @@ import { useState } from "react";
 import { usePokemon, usePokemonDetails } from "./services/queries";
 import Favorites from "./pages/Favorites";
 import SelectGeneration from "./components/SelectGeneration";
+import SearchBar from "./components/SearchBar";
 
 function App() {
   const [pokemonQuery, setPokemonQuery] = useState({
@@ -52,15 +53,7 @@ function App() {
                   pokemonQuery={pokemonQuery}
                   setPokemonQuery={setPokemonQuery}
                 />
-                <div className="flex justify-center mt-10 space-x-2">
-                  <label className="text-white">Search Pokemon:</label>
-                  <input
-                    className="border flex px-1 rounded-sm"
-                    type="text"
-                    placeholder="Pokemon ID or Name"
-                    onChange={(e) => setSearchInput(e.target.value)}
-                  />
-                </div>
+                <SearchBar setSearchInput={setSearchInput} />
                 <PokemonList
                   pokemonDetails={pokemonDetails}
                   addToFavorites={addToFavorites}
