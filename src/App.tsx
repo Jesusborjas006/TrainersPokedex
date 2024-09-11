@@ -18,6 +18,7 @@ function App() {
   const pokemonDetails = usePokemonDetails(pokemon);
   const [favorites, setFavorites] = useState([]);
   const [searchInput, setSearchInput] = useState("");
+  console.log("Search Input: ", searchInput);
 
   const addToFavorites = (pokemonId: number) => {
     const pokemonFavoritedData = pokemonDetails.find((pokemon) => {
@@ -53,7 +54,10 @@ function App() {
                   pokemonQuery={pokemonQuery}
                   setPokemonQuery={setPokemonQuery}
                 />
-                <SearchBar setSearchInput={setSearchInput} />
+                <SearchBar
+                  searchInput={searchInput}
+                  setSearchInput={setSearchInput}
+                />
                 <PokemonList
                   pokemonDetails={pokemonDetails}
                   addToFavorites={addToFavorites}
