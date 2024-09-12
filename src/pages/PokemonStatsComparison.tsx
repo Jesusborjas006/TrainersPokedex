@@ -33,21 +33,21 @@ const PokemonStatsComparison = () => {
   if (status === "error") return <span>Error</span>;
 
   return (
-    <section className="max-w-[1200px] mx-auto">
+    <section className="max-w-[1250px] mx-auto px-4">
       <button className="my-6 text-white" onClick={() => navigate(-1)}>
         &larr; Go Back
       </button>
-      <div className="flex justify-around">
-        <div className="border bg-white w-[40%] rounded-xl">
+      <div className="flex flex-col space-y-10 gap-x-10 md:flex-row md:space-y-0">
+        <div className="bg-white rounded-xl flex-1">
           <div className="p-6">
             <img
-              className="bg-gray-300 rounded-lg"
+              className="bg-gray-300 rounded-lg mx-auto w-[55%]"
               src={data.sprites[1]}
               alt={data.name}
             />
           </div>
           <h3 className="text-center capitalize text-lg">{data.name}</h3>
-          <div className="h-[400px]">
+          <div className="h-[300px] md:h-[350px]">
             <ResponsiveContainer
               width="100%"
               height="100%"
@@ -56,18 +56,24 @@ const PokemonStatsComparison = () => {
               <BarChart
                 data={formatStats(data)}
                 className="pb-10 text-xs md:text-sm lg:text-base"
+                margin={{ bottom: 70 }}
               >
                 <Bar dataKey="base_stat" fill="#8884d8" />
-                <XAxis dataKey="stat" interval={0} />
+                <XAxis
+                  dataKey="stat"
+                  interval={0}
+                  angle={-45}
+                  textAnchor="end"
+                />
                 <YAxis dataKey="base_stat" domain={[0, 200]} />
               </BarChart>
             </ResponsiveContainer>
           </div>
         </div>
-        <div className="border bg-white w-[40%] rounded-xl">
+        <div className=" bg-white rounded-xl flex-1">
           <div className="p-6">
             <img
-              className="bg-gray-300 rounded-lg"
+              className="bg-gray-300 rounded-lg mx-auto w-[55%]"
               src={pokemonSelected2.data?.sprites[1]}
               alt={pokemonSelected2.data?.name}
             />
@@ -75,7 +81,7 @@ const PokemonStatsComparison = () => {
           <h3 className="text-center capitalize text-lg">
             {pokemonSelected2.data?.name}
           </h3>
-          <div className="h-[400px]">
+          <div className="h-[300px] md:h-[350px]">
             <ResponsiveContainer
               width="100%"
               height="100%"
@@ -84,9 +90,15 @@ const PokemonStatsComparison = () => {
               <BarChart
                 data={formatStats(pokemonSelected2.data)}
                 className="pb-10 text-xs md:text-sm lg:text-base"
+                margin={{ bottom: 70 }}
               >
                 <Bar dataKey="base_stat" fill="#8884d8" />
-                <XAxis dataKey="stat" interval={0} />
+                <XAxis
+                  dataKey="stat"
+                  interval={0}
+                  angle={-45}
+                  textAnchor="end"
+                />
                 <YAxis dataKey="base_stat" domain={[0, 200]} />
               </BarChart>
             </ResponsiveContainer>
