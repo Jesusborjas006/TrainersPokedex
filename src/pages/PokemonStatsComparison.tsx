@@ -17,12 +17,16 @@ const PokemonStatsComparison = () => {
     queryFn: () => getPokemonDetails(pokemonComparison2),
   });
   const navigate = useNavigate();
-  const formattedStats = data?.stats.map((stat) => {
-    return {
-      ...stat,
-      stat: stat.stat.name,
-    };
-  });
+
+  const formatStats = (pokemonStats) => {
+    const formattedStats = pokemonStats?.stats.map((stat) => {
+      return {
+        ...stat,
+        stat: stat.stat.name,
+      };
+    });
+    return formattedStats;
+  };
 
   if (status === "pending") return <span>Loading...</span>;
 
@@ -50,7 +54,7 @@ const PokemonStatsComparison = () => {
               className="mx-auto relative"
             >
               <BarChart
-                data={formattedStats}
+                data={formatStats(data)}
                 className="pb-10 text-xs md:text-sm lg:text-base"
               >
                 <Bar dataKey="base_stat" fill="#8884d8" />
@@ -78,7 +82,7 @@ const PokemonStatsComparison = () => {
               className="mx-auto relative"
             >
               <BarChart
-                data={formattedStats}
+                data={formatStats(pokemonSelected2.data)}
                 className="pb-10 text-xs md:text-sm lg:text-base"
               >
                 <Bar dataKey="base_stat" fill="#8884d8" />
