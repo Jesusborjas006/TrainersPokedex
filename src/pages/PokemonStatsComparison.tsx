@@ -21,8 +21,6 @@ const PokemonStatsComparison = () => {
     enabled: pokemonComparison2 !== "",
   });
 
-  if (firstPokemon.status === "error") return <span>Error</span>;
-
   const formatStats = (pokemonStats) => {
     const formattedStats = pokemonStats?.stats.map((stat) => {
       return {
@@ -32,6 +30,38 @@ const PokemonStatsComparison = () => {
     });
     return formattedStats;
   };
+
+  let firstPokemonStatusContent;
+  if (firstPokemon.isLoading) {
+    firstPokemonStatusContent = <p>Getting Pokemon Info...</p>;
+  } else if (firstPokemon.error) {
+    firstPokemonStatusContent = (
+      <p>Trouble getting data. Make sure the Name or ID are correct!</p>
+    );
+  } else {
+    firstPokemonStatusContent = (
+      <p>
+        No data to display. <br />
+        Please fill the form to see Pokemon's stats.
+      </p>
+    );
+  }
+
+  let secondPokemonStatusContent;
+  if (secondPokemon.isLoading) {
+    secondPokemonStatusContent = <p>Getting Pokemon Info...</p>;
+  } else if (secondPokemon.error) {
+    secondPokemonStatusContent = (
+      <p>Trouble getting data. Make sure the Name or ID are correct!</p>
+    );
+  } else {
+    secondPokemonStatusContent = (
+      <p>
+        No data to display. <br />
+        Please fill the form to see Pokemon's stats.
+      </p>
+    );
+  }
 
   return (
     <section className="max-w-[1250px] mx-auto px-4 ">
@@ -44,7 +74,7 @@ const PokemonStatsComparison = () => {
           <input
             className="border pl-1 ml-1"
             type="text"
-            placeholder="Enter pokemon name..."
+            placeholder="Search Pokemon..."
             value={pokemonComparison1}
             onChange={(e) => setPokemonComparison1(e.target.value)}
           />
@@ -54,7 +84,7 @@ const PokemonStatsComparison = () => {
           <input
             className="border pl-1 ml-1"
             type="text"
-            placeholder="Enter pokemon name..."
+            placeholder="Search Pokemon..."
             value={pokemonComparison2}
             onChange={(e) => setPokemonComparison2(e.target.value)}
           />
@@ -104,15 +134,8 @@ const PokemonStatsComparison = () => {
           </>
         ) : (
           <div className="bg-white rounded-xl flex-1 h-full">
-            <div className="flex flex-col justify-center text-center">
-              {firstPokemon.isLoading ? (
-                <p className="p-10">Getting Info...</p>
-              ) : (
-                <p className="p-10">
-                  No data to display. <br />
-                  Please fill the form to see Pokemon's stats.
-                </p>
-              )}
+            <div className="flex flex-col justify-center text-center p-10">
+              {firstPokemonStatusContent}
             </div>
           </div>
         )}
@@ -159,15 +182,8 @@ const PokemonStatsComparison = () => {
           </>
         ) : (
           <div className="bg-white rounded-xl flex-1 h-full">
-            <div className="flex flex-col justify-center text-center">
-              {secondPokemon.isLoading ? (
-                <p className="p-10">Getting Info...</p>
-              ) : (
-                <p className="p-10">
-                  No data to display. <br />
-                  Please fill the form to see Pokemon's stats.
-                </p>
-              )}
+            <div className="flex flex-col justify-center text-center p-10">
+              {secondPokemonStatusContent}
             </div>
           </div>
         )}
