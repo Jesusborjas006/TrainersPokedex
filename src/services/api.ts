@@ -77,8 +77,28 @@ export const getPokemonAbility = async (path: string) => {
   };
 };
 
-export const getPokemonEvolutions = async (path: string) => {
-  const response = await fetch(path);
+export const getPokemonInfo = async (pokemonName: string) => {
+  const response = await fetch(`${BASE_URL}/pokemon/${pokemonName}`);
+
+  if (!response.ok) {
+    throw new Error("Can't get Pokemon Info");
+  }
+
   const data = await response.json();
-  return data;
+  const { name, id, sprites, types, weight, height, stats, abilities } = data;
+  return {
+    name,
+    id,
+    sprites: [
+      sprites.front_default,
+      data.sprites.other["official-artwork"].front_default,
+    ],
+    types: types.map(
+      (typeInfo: { type: { name: string } }) => typeInfo.type.name
+    ),
+    weight,
+    height,
+    stats,
+    ability: abilities[0].ability,
+  };
 };

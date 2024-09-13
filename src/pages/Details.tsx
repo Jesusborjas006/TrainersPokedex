@@ -1,46 +1,22 @@
-import { UseQueryResult } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { useNavigate, useParams } from "react-router-dom";
 import { usePokemonAbility, usePokemonSpecies } from "../services/queries";
 import { formattedPokemonId, typeColors } from "../utils/utils";
 import { TypeColorTypes } from "../types/pokemon";
 import StatsBar from "../components/StatsBar";
+import { getPokemonInfo } from "../services/api";
 
-interface PokemonProps {
-  pokemonDetails: UseQueryResult<
-    {
-      name: string;
-      id: number;
-      sprites: string[];
-      types: string[];
-      height: number;
-      weight: number;
-      stats: {
-        base_stat: number;
-        effort: number;
-        stat: {
-          name: string;
-          url: string;
-        };
-      }[];
-      ability: {
-        name: string;
-        url: string;
-      };
-    },
-    Error
-  >[];
-}
-
-const Details = ({ pokemonDetails }: PokemonProps) => {
+const Details = () => {
   const navigate = useNavigate();
   const pokemonEndpoint = useParams();
-  const pokemonData = pokemonDetails.find(
-    (pokemon) => pokemon.data?.name === pokemonEndpoint.pokemon
-  );
-  const pokemonSpecies = usePokemonSpecies(pokemonData?.data.name);
-  const pokemonAbility = usePokemonAbility(pokemonData?.data?.ability.url);
+  const pokemonInfo = useQuery({
+    queryKey: ["pokemonDetails", pokemonEndpoint.pokemon],
+    queryFn: () => getPokemonInfo(pokemonEndpoint.pokemon),
+  });
+  const pokemonSpecies = usePokemonSpecies(pokemonInfo.data?.name);
+  const pokemonAbility = usePokemonAbility(pokemonInfo?.data?.ability.url);
 
-  const pokemonStats = pokemonData?.data?.stats;
+  const pokemonStats = pokemonInfo?.data?.stats;
 
   const formattedStats = pokemonStats?.map((stat) => {
     return {
@@ -49,77 +25,81 @@ const Details = ({ pokemonDetails }: PokemonProps) => {
     };
   });
 
-  if (!pokemonData)
+  if (
+    pokemonInfo.status === "pending" ||
+    pokemonSpecies.status === "pending" ||
+    pokemonAbility.status === "pending"
+  )
     return (
       <p className="text-white text-center pt-10 capitalize">
         Loading {pokemonEndpoint.pokemon} data...
       </p>
     );
 
-  if (pokemonData.data) {
-    return (
-      <section className="max-w-[1200px] mx-auto">
-        <button className="my-6 text-white" onClick={() => navigate(-1)}>
-          &larr; Go Back
-        </button>
-        <div className="bg-slate-100 py-8 rounded-xl">
-          <h2 className="text-center capitalize text-2xl font-semibold pb-4">
-            {pokemonData.data.name}{" "}
-            <span className=" font-light">
-              | #{formattedPokemonId(String(pokemonData.data.id))}
-            </span>
-          </h2>
-          <div className="flex w-[90%] justify-center gap-x-6 mx-auto py-4">
-            <div className="w-[35%]">
-              <img
-                className="object-cover bg-gray-300 rounded-lg"
-                src={pokemonData.data.sprites[1]}
-                alt={pokemonData.data.name}
-              />
-            </div>
-            <div className="w-[55%] space-y-2">
-              <p>{pokemonSpecies.data?.description}</p>
-              <h3 className="text-xl font-medium">Type</h3>
-              <ul className="flex gap-x-2 capitalize text-center text-white">
-                {pokemonData.data.types.map((type) => (
-                  <li
-                    style={{
-                      backgroundColor: typeColors[type as keyof TypeColorTypes],
-                      padding: "2px 0",
-                      borderRadius: "4px",
-                      display: "inline-block",
-                      width: "70px",
-                    }}
-                    key={type}
-                  >
-                    {type}
-                  </li>
-                ))}
-              </ul>
-              <p>Height: {pokemonData.data.height}</p>
-              <p>Weight: {pokemonData.data.weight}</p>
-              <p>
-                Growth Rate:{" "}
-                <span className="capitalize">
-                  {pokemonSpecies.data?.growth_rate}
-                </span>
-              </p>
-              <p className="capitalize">
-                Ability: {pokemonData.data.ability.name}
-              </p>
-              <p>{pokemonAbility.data?.abilityEffect}</p>
-            </div>
+  if (pokemonInfo.status === "error") return <span>Error loading pokemon</span>;
+
+  return (
+    <section className="max-w-[1200px] mx-auto">
+      <button className="my-6 text-white" onClick={() => navigate(-1)}>
+        &larr; Go Back
+      </button>
+      <div className="bg-slate-100 py-8 rounded-xl">
+        <h2 className="text-center capitalize text-2xl font-semibold pb-4">
+          {pokemonInfo.data.name}{" "}
+          <span className=" font-light">
+            | #{formattedPokemonId(String(pokemonInfo.data.id))}
+          </span>
+        </h2>
+        <div className="flex w-[90%] justify-center gap-x-6 mx-auto py-4">
+          <div className="w-[35%]">
+            <img
+              className="object-cover bg-gray-300 rounded-lg"
+              src={pokemonInfo.data.sprites[1]}
+              alt={pokemonInfo.data.name}
+            />
           </div>
-          <div className="h-[500px] mt-20 ">
-            <h3 className="text-center text-xl font-medium">
-              Pokemon Base Stats
-            </h3>
-            <StatsBar formattedStats={formattedStats} />
+          <div className="w-[55%] space-y-2">
+            <p>{pokemonSpecies.data?.description}</p>
+            <h3 className="text-xl font-medium">Type</h3>
+            <ul className="flex gap-x-2 capitalize text-center text-white">
+              {pokemonInfo.data.types.map((type) => (
+                <li
+                  style={{
+                    backgroundColor: typeColors[type as keyof TypeColorTypes],
+                    padding: "2px 0",
+                    borderRadius: "4px",
+                    display: "inline-block",
+                    width: "70px",
+                  }}
+                  key={type}
+                >
+                  {type}
+                </li>
+              ))}
+            </ul>
+            <p>Height: {pokemonInfo.data.height}</p>
+            <p>Weight: {pokemonInfo.data.weight}</p>
+            <p>
+              Growth Rate:{" "}
+              <span className="capitalize">
+                {pokemonSpecies.data?.growth_rate}
+              </span>
+            </p>
+            <p className="capitalize">
+              Ability: {pokemonInfo.data.ability.name}
+            </p>
+            <p>{pokemonAbility.data?.abilityEffect}</p>
           </div>
         </div>
-      </section>
-    );
-  }
+        <div className="h-[500px] mt-20 ">
+          <h3 className="text-center text-xl font-medium">
+            Pokemon Base Stats
+          </h3>
+          <StatsBar formattedStats={formattedStats} />
+        </div>
+      </div>
+    </section>
+  );
 };
 
 export default Details;
