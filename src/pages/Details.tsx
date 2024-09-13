@@ -98,7 +98,12 @@ const Details = ({ pokemonDetails }: PokemonProps) => {
               </ul>
               <p>Height: {pokemonData.data.height}</p>
               <p>Weight: {pokemonData.data.weight}</p>
-              <p>Growth Rate: {pokemonSpecies.data?.growth_rate.name}</p>
+              <p>
+                Growth Rate:{" "}
+                <span className="capitalize">
+                  {pokemonSpecies.data?.growth_rate}
+                </span>
+              </p>
               <p className="capitalize">
                 Ability: {pokemonData.data.ability.name}
               </p>
