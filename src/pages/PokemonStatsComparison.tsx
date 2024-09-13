@@ -103,16 +103,18 @@ const PokemonStatsComparison = () => {
             </div>
           </>
         ) : (
-          <>
-            <div className="bg-white rounded-xl flex-1">
-              <div className="flex flex-col justify-center text-center h-full">
+          <div className="bg-white rounded-xl flex-1 h-full">
+            <div className="flex flex-col justify-center text-center">
+              {firstPokemon.isLoading ? (
+                <p className="p-10">Getting Info...</p>
+              ) : (
                 <p className="p-10">
                   No data to display. <br />
                   Please fill the form to see Pokemon's stats.
                 </p>
-              </div>
+              )}
             </div>
-          </>
+          </div>
         )}
         {secondPokemon.status === "success" ? (
           <>
@@ -156,16 +158,18 @@ const PokemonStatsComparison = () => {
             </div>
           </>
         ) : (
-          <>
-            <div className="bg-white rounded-xl flex-1 h-full">
-              <div className="flex flex-col justify-center text-center">
+          <div className="bg-white rounded-xl flex-1 h-full">
+            <div className="flex flex-col justify-center text-center">
+              {secondPokemon.isLoading ? (
+                <p className="p-10">Getting Info...</p>
+              ) : (
                 <p className="p-10">
                   No data to display. <br />
                   Please fill the form to see Pokemon's stats.
                 </p>
-              </div>
+              )}
             </div>
-          </>
+          </div>
         )}
       </div>
     </section>
