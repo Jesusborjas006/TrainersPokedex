@@ -7,6 +7,7 @@ import { usePokemon, usePokemonDetails } from "./services/queries";
 import Favorites from "./pages/Favorites";
 import SelectGeneration from "./components/SelectGeneration";
 import SearchBar from "./components/SearchBar";
+import PokemonStatsComparison from "./pages/PokemonStatsComparison";
 
 function App() {
   const [pokemonQuery, setPokemonQuery] = useState({
@@ -78,6 +79,10 @@ function App() {
                 removeFromFavorites={removeFromFavorites}
               />
             }
+          />
+          <Route
+            path="/pokemon/compare-stats"
+            element={<PokemonStatsComparison />}
           />
         </Routes>
       </main>
