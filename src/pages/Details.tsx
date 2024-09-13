@@ -40,8 +40,6 @@ const Details = ({ pokemonDetails }: PokemonProps) => {
   const pokemonSpecies = usePokemonSpecies(pokemonData?.data.name);
   const pokemonAbility = usePokemonAbility(pokemonData?.data?.ability.url);
 
-  console.log(pokemonSpecies?.data);
-
   const pokemonStats = pokemonData?.data?.stats;
 
   const formattedStats = pokemonStats?.map((stat) => {
@@ -57,8 +55,6 @@ const Details = ({ pokemonDetails }: PokemonProps) => {
         Loading {pokemonEndpoint.pokemon} data...
       </p>
     );
-
-  // I need the growth rate and .flavor_text_entries[0].flavor_text in english
 
   if (pokemonData.data) {
     return (
@@ -106,7 +102,7 @@ const Details = ({ pokemonDetails }: PokemonProps) => {
               <p className="capitalize">
                 Ability: {pokemonData.data.ability.name}
               </p>
-              <p>{pokemonAbility.data?.effect_entries[0].effect}</p>
+              <p>{pokemonAbility.data?.abilityEffect}</p>
             </div>
           </div>
           <div className="h-[500px] mt-20 ">

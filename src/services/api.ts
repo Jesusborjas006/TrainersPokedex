@@ -62,8 +62,19 @@ export const getPokemonSpecies = async (pokemonName: string) => {
 
 export const getPokemonAbility = async (path: string) => {
   const response = await fetch(path);
+
+  if (!response.ok) {
+    throw new Error("Can't get ability from Pokemon");
+  }
   const data = await response.json();
-  return data;
+  const { effect_entries } = data;
+  return {
+    abilityEffect: effect_entries.find(
+      (effect: { language: { name: string } }) => {
+        return effect.language.name === "en";
+      }
+    ).effect,
+  };
 };
 
 export const getPokemonEvolutions = async (path: string) => {
