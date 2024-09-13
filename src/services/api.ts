@@ -44,14 +44,37 @@ export const getPokemonDetails = async (pokemonName: string) => {
 
 export const getPokemonSpecies = async (pokemonName: string) => {
   const response = await fetch(`${BASE_URL}/pokemon-species/${pokemonName}`);
+
+  if (!response.ok) {
+    throw new Error("Can't get species");
+  }
+
   const data = await response.json();
-  return data;
+  const { flavor_text_entries, growth_rate } = data;
+  return {
+    description: flavor_text_entries.find(
+      (description: { language: { name: string } }) =>
+        description.language.name === "en"
+    ).flavor_text,
+    growth_rate: growth_rate.name,
+  };
 };
 
 export const getPokemonAbility = async (path: string) => {
   const response = await fetch(path);
+
+  if (!response.ok) {
+    throw new Error("Can't get ability from Pokemon");
+  }
   const data = await response.json();
-  return data;
+  const { effect_entries } = data;
+  return {
+    abilityEffect: effect_entries.find(
+      (effect: { language: { name: string } }) => {
+        return effect.language.name === "en";
+      }
+    ).effect,
+  };
 };
 
 export const getPokemonEvolutions = async (path: string) => {

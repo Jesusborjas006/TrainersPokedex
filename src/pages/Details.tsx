@@ -78,7 +78,7 @@ const Details = ({ pokemonDetails }: PokemonProps) => {
               />
             </div>
             <div className="w-[55%] space-y-2">
-              <p>{pokemonSpecies.data?.flavor_text_entries[0].flavor_text}</p>
+              <p>{pokemonSpecies.data?.description}</p>
               <h3 className="text-xl font-medium">Type</h3>
               <ul className="flex gap-x-2 capitalize text-center text-white">
                 {pokemonData.data.types.map((type) => (
@@ -98,11 +98,16 @@ const Details = ({ pokemonDetails }: PokemonProps) => {
               </ul>
               <p>Height: {pokemonData.data.height}</p>
               <p>Weight: {pokemonData.data.weight}</p>
-              <p>Growth Rate: {pokemonSpecies.data?.growth_rate.name}</p>
+              <p>
+                Growth Rate:{" "}
+                <span className="capitalize">
+                  {pokemonSpecies.data?.growth_rate}
+                </span>
+              </p>
               <p className="capitalize">
                 Ability: {pokemonData.data.ability.name}
               </p>
-              <p>{pokemonAbility.data?.effect_entries[0].effect}</p>
+              <p>{pokemonAbility.data?.abilityEffect}</p>
             </div>
           </div>
           <div className="h-[500px] mt-20 ">
