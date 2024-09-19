@@ -13,7 +13,7 @@ const Details = () => {
     queryKey: ["pokemonDetails", pokemonEndpoint.pokemon],
     queryFn: () => getPokemonInfo(pokemonEndpoint.pokemon),
   });
-  const pokemonSpecies = usePokemonSpecies(pokemonInfo.data?.name);
+  const pokemonSpecies = usePokemonSpecies(pokemonEndpoint.pokemon);
   const pokemonAbility = usePokemonAbility(pokemonInfo?.data?.ability.url);
 
   const pokemonStats = pokemonInfo?.data?.stats;
@@ -25,11 +25,7 @@ const Details = () => {
     };
   });
 
-  if (
-    pokemonInfo.status === "pending" ||
-    pokemonSpecies.status === "pending" ||
-    pokemonAbility.status === "pending"
-  )
+  if (pokemonInfo.status === "pending")
     return (
       <p className="text-white text-center pt-10 capitalize">
         Loading {pokemonEndpoint.pokemon} data...
@@ -37,6 +33,8 @@ const Details = () => {
     );
 
   if (pokemonInfo.status === "error") return <span>Error loading pokemon</span>;
+
+  console.log(pokemonInfo.status);
 
   return (
     <section className="max-w-[1200px] mx-auto">
