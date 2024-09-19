@@ -9,14 +9,18 @@ import { getPokemonInfo } from "../services/api";
 const Details = () => {
   const navigate = useNavigate();
   const pokemonEndpoint = useParams();
-  const pokemonInfo = useQuery({
+  const {
+    data: pokemonInfo,
+    isPending,
+    isError,
+  } = useQuery({
     queryKey: ["pokemonDetails", pokemonEndpoint.pokemon],
     queryFn: () => getPokemonInfo(pokemonEndpoint.pokemon),
   });
   const pokemonSpecies = usePokemonSpecies(pokemonEndpoint.pokemon);
-  const pokemonAbility = usePokemonAbility(pokemonInfo?.data?.ability.url);
+  const pokemonAbility = usePokemonAbility(pokemonInfo?.ability.url);
 
-  const pokemonStats = pokemonInfo?.data?.stats;
+  const pokemonStats = pokemonInfo?.stats;
 
   const formattedStats = pokemonStats?.map((stat) => {
     return {
@@ -25,42 +29,37 @@ const Details = () => {
     };
   });
 
-  if (pokemonInfo.status === "pending")
-    return (
+  let detailsContent;
+  if (isPending) {
+    detailsContent = (
       <p className="text-white text-center pt-10 capitalize">
         Loading {pokemonEndpoint.pokemon} data...
       </p>
     );
-
-  if (pokemonInfo.status === "error") return <span>Error loading pokemon</span>;
-
-  console.log(pokemonInfo.status);
-
-  return (
-    <section className="max-w-[1200px] mx-auto">
-      <button className="my-6 text-white" onClick={() => navigate(-1)}>
-        &larr; Go Back
-      </button>
+  } else if (isError) {
+    detailsContent = <span>Error loading pokemon</span>;
+  } else {
+    detailsContent = (
       <div className="bg-slate-100 py-8 rounded-xl">
         <h2 className="text-center capitalize text-2xl font-semibold pb-4">
-          {pokemonInfo.data.name}{" "}
+          {pokemonInfo.name}{" "}
           <span className=" font-light">
-            | #{formattedPokemonId(String(pokemonInfo.data.id))}
+            | #{formattedPokemonId(String(pokemonInfo.id))}
           </span>
         </h2>
         <div className="flex w-[90%] justify-center gap-x-6 mx-auto py-4">
           <div className="w-[35%]">
             <img
               className="object-cover bg-gray-300 rounded-lg"
-              src={pokemonInfo.data.sprites[1]}
-              alt={pokemonInfo.data.name}
+              src={pokemonInfo.sprites[1]}
+              alt={pokemonInfo.name}
             />
           </div>
           <div className="w-[55%] space-y-2">
             <p>{pokemonSpecies.data?.description}</p>
             <h3 className="text-xl font-medium">Type</h3>
             <ul className="flex gap-x-2 capitalize text-center text-white">
-              {pokemonInfo.data.types.map((type) => (
+              {pokemonInfo.types.map((type) => (
                 <li
                   style={{
                     backgroundColor: typeColors[type as keyof TypeColorTypes],
@@ -75,17 +74,15 @@ const Details = () => {
                 </li>
               ))}
             </ul>
-            <p>Height: {pokemonInfo.data.height}</p>
-            <p>Weight: {pokemonInfo.data.weight}</p>
+            <p>Height: {pokemonInfo.height}</p>
+            <p>Weight: {pokemonInfo.weight}</p>
             <p>
               Growth Rate:{" "}
               <span className="capitalize">
                 {pokemonSpecies.data?.growth_rate}
               </span>
             </p>
-            <p className="capitalize">
-              Ability: {pokemonInfo.data.ability.name}
-            </p>
+            <p className="capitalize">Ability: {pokemonInfo.ability.name}</p>
             <p>{pokemonAbility.data?.abilityEffect}</p>
           </div>
         </div>
@@ -96,6 +93,15 @@ const Details = () => {
           <StatsBar formattedStats={formattedStats} />
         </div>
       </div>
+    );
+  }
+
+  return (
+    <section className="max-w-[1200px] mx-auto">
+      <button className="my-6 text-white" onClick={() => navigate(-1)}>
+        &larr; Go Back
+      </button>
+      {detailsContent}
     </section>
   );
 };
