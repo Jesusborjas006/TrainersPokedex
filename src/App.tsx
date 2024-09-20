@@ -33,7 +33,7 @@ function App() {
     if (!namesInFavorites.includes(pokemonNameFavorited)) {
       setFavorites([...favorites, pokemonFavoritedData.data]);
       toast.success(
-        capitalizeString(`${pokemonNameFavorited} added to favorites`)
+        capitalizeString(`${pokemonNameFavorited} added to favorites.`)
       );
     }
     return;
