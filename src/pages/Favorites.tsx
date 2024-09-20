@@ -1,9 +1,14 @@
 import { useNavigate } from "react-router";
-import { formattedPokemonId, typeColors } from "../utils/utils";
+import {
+  capitalizeString,
+  formattedPokemonId,
+  typeColors,
+} from "../utils/utils";
 import { Link } from "react-router-dom";
 import { TypeColorTypes } from "../types/pokemon";
 import ListGrid from "../layouts/ListGrid";
 import Card from "../layouts/Card";
+import { Toaster, toast } from "react-hot-toast";
 
 interface FavoritesProps {
   favorites: never[];
@@ -15,6 +20,7 @@ const Favorites = ({ favorites, removeFromFavorites }: FavoritesProps) => {
 
   return (
     <section className="max-w-[1200px] mx-auto">
+      <Toaster position="top-center" />
       <button className="my-6 text-white" onClick={() => navigate(-1)}>
         &larr; Go Back
       </button>
@@ -60,7 +66,12 @@ const Favorites = ({ favorites, removeFromFavorites }: FavoritesProps) => {
                 ))}
               </div>
               <button
-                onClick={() => removeFromFavorites(pokemon.id)}
+                onClick={() => {
+                  toast.error(
+                    `${capitalizeString(pokemon.name)} has been removed.`
+                  );
+                  removeFromFavorites(pokemon.id);
+                }}
                 className="border relative top-4 px-2 py-1 bg-red-700 text-white hover:bg-red-500 text-sm rounded-mg"
               >
                 Remove

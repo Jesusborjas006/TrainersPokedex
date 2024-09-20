@@ -9,6 +9,8 @@ import SelectGeneration from "./components/SelectGeneration";
 import SearchBar from "./components/SearchBar";
 import PokemonStatsComparison from "./pages/PokemonStatsComparison";
 import ScrollToTop from "./components/ScrollToTop";
+import toast, { Toaster } from "react-hot-toast";
+import { capitalizeString } from "./utils/utils";
 
 function App() {
   const [pokemonQuery, setPokemonQuery] = useState({
@@ -26,10 +28,13 @@ function App() {
       return pokemon.data?.id === pokemonId;
     });
     const namesInFavorites = favorites.map((pokemon) => pokemon.name);
-    const pokemonNamesFavorited = pokemonFavoritedData?.data?.name;
+    const pokemonNameFavorited = pokemonFavoritedData?.data?.name;
 
-    if (!namesInFavorites.includes(pokemonNamesFavorited)) {
+    if (!namesInFavorites.includes(pokemonNameFavorited)) {
       setFavorites([...favorites, pokemonFavoritedData.data]);
+      toast.success(
+        capitalizeString(`${pokemonNameFavorited} added to favorites.`)
+      );
     }
     return;
   };
@@ -52,6 +57,7 @@ function App() {
             path="/"
             element={
               <>
+                <Toaster position="top-center" />
                 <SelectGeneration
                   pokemonQuery={pokemonQuery}
                   setPokemonQuery={setPokemonQuery}
@@ -69,10 +75,7 @@ function App() {
               </>
             }
           />
-          <Route
-            path="/:pokemon"
-            element={<Details pokemonDetails={pokemonDetails} />}
-          />
+          <Route path="/:pokemon" element={<Details />} />
           <Route
             path="pokedex/favorites"
             element={

@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { usePokemonAbility, usePokemonSpecies } from "../services/queries";
 import { formattedPokemonId, typeColors } from "../utils/utils";
 import { TypeColorTypes } from "../types/pokemon";

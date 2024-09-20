@@ -14,6 +14,10 @@ export const formattedPokemonId = (pokemonId: string) => {
   return formattedId;
 };
 
+export const capitalizeString = (string: string) => {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+};
+
 export const typeColors: TypeColorTypes = {
   grass: "#78C850",
   fire: "#F08030",
