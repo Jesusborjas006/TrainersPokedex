@@ -8,6 +8,7 @@ import Favorites from "./pages/Favorites";
 import SelectGeneration from "./components/SelectGeneration";
 import SearchBar from "./components/SearchBar";
 import PokemonStatsComparison from "./pages/PokemonStatsComparison";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   const [pokemonQuery, setPokemonQuery] = useState({
@@ -45,6 +46,7 @@ function App() {
       <header>{<Navbar />}</header>
 
       <main className="bg-slate-700 pb-10 min-h-screen">
+        <ScrollToTop />
         <Routes>
           <Route
             path="/"
