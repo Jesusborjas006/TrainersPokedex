@@ -1,6 +1,7 @@
 import { UseQueryResult } from "@tanstack/react-query";
 import Pokemon from "./Pokemon";
 import ListGrid from "../layouts/ListGrid";
+import LoadingSpinner from "../ui/LoadingSpinner";
 
 interface PokemonListProps {
   pokemonDetails: UseQueryResult<
@@ -50,10 +51,8 @@ const PokemonList = ({
     (query) => query.status === "error"
   );
 
-  if (areAnyPending)
-    return (
-      <p className="text-white text-center text-lg pt-10">Loading data...</p>
-    );
+  if (areAnyPending) return <LoadingSpinner />;
+
   if (areAnyFailing) return <span>Can't load pokemon data</span>;
 
   const searchedPokemon = pokemonDetails.filter((pokemon) => {
