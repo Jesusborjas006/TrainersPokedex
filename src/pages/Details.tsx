@@ -5,6 +5,7 @@ import { formattedPokemonId, typeColors } from "../utils/utils";
 import { TypeColorTypes } from "../types/pokemon";
 import StatsBar from "../components/StatsBar";
 import { getPokemonInfo } from "../services/api";
+import LoadingSpinner from "../ui/LoadingSpinner";
 
 const Details = () => {
   const navigate = useNavigate();
@@ -31,11 +32,7 @@ const Details = () => {
 
   let detailsContent;
   if (isPending) {
-    detailsContent = (
-      <p className="text-white text-center pt-10 capitalize">
-        Loading {pokemonEndpoint.pokemon} data...
-      </p>
-    );
+    detailsContent = <LoadingSpinner />;
   } else if (isError) {
     detailsContent = (
       <div className="text-center text-white mt-10">

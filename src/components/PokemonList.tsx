@@ -51,11 +51,8 @@ const PokemonList = ({
     (query) => query.status === "error"
   );
 
-  if (areAnyPending)
-    return (
-      // <p className="text-white text-center text-lg pt-10">Loading data...</p>
-      <LoadingSpinner />
-    );
+  if (areAnyPending) return <LoadingSpinner />;
+
   if (areAnyFailing) return <span>Can't load pokemon data</span>;
 
   const searchedPokemon = pokemonDetails.filter((pokemon) => {

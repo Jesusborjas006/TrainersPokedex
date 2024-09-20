@@ -18,6 +18,7 @@ function App() {
     limit: 151,
     region: "Kanto",
   });
+  console.log("rendered");
   const pokemon = usePokemon(pokemonQuery.startId, pokemonQuery.limit);
   const pokemonDetails = usePokemonDetails(pokemon);
   const [favorites, setFavorites] = useState([]);
