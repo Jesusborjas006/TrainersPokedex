@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { usePokemonAbility, usePokemonSpecies } from "../services/queries";
 import { formattedPokemonId, typeColors } from "../utils/utils";
 import { TypeColorTypes } from "../types/pokemon";
@@ -37,7 +37,19 @@ const Details = () => {
       </p>
     );
   } else if (isError) {
-    detailsContent = <span>Error loading pokemon</span>;
+    detailsContent = (
+      <div className="text-center text-white mt-10">
+        <p className="text-xl">
+          There's been an error fetching data for {pokemonEndpoint.pokemon}.
+        </p>
+        <button
+          className="bg-white text-black rounded-md px-3 py-1 mt-4 font-medium hover:bg-red-700 hover:text-white"
+          onClick={() => navigate(-1)}
+        >
+          Go Back
+        </button>
+      </div>
+    );
   } else {
     detailsContent = (
       <div className="bg-slate-100 py-8 rounded-xl">
