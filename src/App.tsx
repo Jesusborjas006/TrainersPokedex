@@ -75,7 +75,7 @@ function App() {
             }
           />
           <Route
-            path="/pokemon/compare-stats"
+            path="/pokedex/compare-stats"
             element={<PokemonStatsComparison />}
           />
           <Route path="*" element={<NotFound />} />

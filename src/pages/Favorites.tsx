@@ -21,7 +21,7 @@ const Favorites = ({ favorites, removeFromFavorites }: FavoritesProps) => {
 
   return (
     <>
-      <header>{<Navbar />}</header>
+      <Navbar />
       <section className="max-w-[1200px] mx-auto">
         <Toaster position="top-center" />
         <button className="my-6 text-white" onClick={() => navigate(-1)}>

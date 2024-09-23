@@ -108,7 +108,7 @@ const Details = () => {
 
   return (
     <>
-      <Navbar />
+      {<Navbar />}
       <section className="max-w-[1200px] mx-auto">
         <button className="my-6 text-white" onClick={() => navigate(-1)}>
           &larr; Go Back

@@ -12,28 +12,31 @@ const NotFound = () => {
   if (isPending) return <LoadingSpinner />;
 
   return (
-    <section className="flex items-center justify-center h-screen text-center">
-      <div className="bg-white p-10 rounded-lg">
-        <img
-          className="w-1/2 mx-auto"
-          src={data?.sprites[1]}
-          alt={data?.name}
-        />
-        <h3 className="text-7xl font-semibold">404</h3>
-        <h4 className="text-3xl">Page Not Found</h4>
-        <p className="pt-4">
-          The Page you're looking for doesn't exist or an other error occurred.
-        </p>
-        <p>
-          Head over to this link
-          <Link to="/pokedex" className="text-blue-700 underline">
-            {" "}
-            http://localhost:5173/pokedex
-          </Link>{" "}
-          to go back!
-        </p>
-      </div>
-    </section>
+    <>
+      <section className="flex items-center justify-center h-screen text-center absolute inset-0">
+        <div className="bg-white p-10 rounded-lg">
+          <img
+            className="w-1/2 mx-auto"
+            src={data?.sprites[1]}
+            alt={data?.name}
+          />
+          <h3 className="text-7xl font-semibold">404</h3>
+          <h4 className="text-3xl">Page Not Found</h4>
+          <p className="pt-4">
+            The Page you're looking for doesn't exist or an other error
+            occurred.
+          </p>
+          <p>
+            Head over to this link
+            <Link to="/pokedex" className="text-blue-700 underline">
+              {" "}
+              http://localhost:5173/pokedex
+            </Link>{" "}
+            to go back!
+          </p>
+        </div>
+      </section>
+    </>
   );
 };
 

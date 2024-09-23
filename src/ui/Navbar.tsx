@@ -10,7 +10,7 @@ const Navbar = () => {
             <NavLink to="/pokedex/favorites" className="hover:underline">
               Favorites
             </NavLink>
-            <NavLink to="/pokemon/compare-stats" className="hover:underline">
+            <NavLink to="/pokedex/compare-stats" className="hover:underline">
               Compare Stats
             </NavLink>
           </div>
