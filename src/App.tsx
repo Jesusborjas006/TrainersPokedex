@@ -47,8 +47,6 @@ function App() {
 
   return (
     <>
-      <header>{<Navbar />}</header>
-
       <main className="bg-slate-700 pb-10 min-h-screen">
         <ScrollToTop />
         <Routes>

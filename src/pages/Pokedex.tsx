@@ -3,6 +3,7 @@ import SelectGeneration from "../components/SelectGeneration";
 import SearchBar from "../components/SearchBar";
 import PokemonList from "../components/PokemonList";
 import { UseQueryResult } from "@tanstack/react-query";
+import Navbar from "../ui/Navbar";
 
 interface PokedexProps {
   pokemonQuery: {
@@ -43,6 +44,7 @@ const Pokedex = ({
 }: PokedexProps) => {
   return (
     <>
+      <header>{<Navbar />}</header>
       <Toaster position="top-center" />
       <SelectGeneration
         pokemonQuery={pokemonQuery}

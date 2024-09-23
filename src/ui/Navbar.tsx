@@ -6,7 +6,7 @@ const Navbar = () => {
       <div className="max-w-[1200px] flex items-end justify-between mx-auto">
         <h2 className="text-xl">Trainers Pokedex</h2>
         <div className="text-xl space-x-10">
-          <NavLink to="pokedex/favorites" className="hover:underline">
+          <NavLink to="/pokedex/favorites" className="hover:underline">
             Favorites
           </NavLink>
           <NavLink to="/pokemon/compare-stats" className="hover:underline">
