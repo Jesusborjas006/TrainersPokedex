@@ -1,4 +1,3 @@
-import Navbar from "./ui/Navbar";
 import { Routes, Route, Navigate } from "react-router";
 import Details from "./pages/Details";
 import { useState } from "react";
@@ -47,7 +46,7 @@ function App() {
 
   return (
     <>
-      <main className="bg-slate-700 pb-10 min-h-screen">
+      <main className="bg-slate-700 min-h-screen">
         <ScrollToTop />
         <Routes>
           <Route index element={<Navigate replace to="pokedex" />} />
