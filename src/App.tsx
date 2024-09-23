@@ -1,16 +1,14 @@
 import Navbar from "./ui/Navbar";
-import PokemonList from "./components/PokemonList";
-import { Routes, Route } from "react-router";
+import { Routes, Route, Navigate } from "react-router";
 import Details from "./pages/Details";
 import { useState } from "react";
 import { usePokemon, usePokemonDetails } from "./services/queries";
 import Favorites from "./pages/Favorites";
-import SelectGeneration from "./components/SelectGeneration";
-import SearchBar from "./components/SearchBar";
 import PokemonStatsComparison from "./pages/PokemonStatsComparison";
 import ScrollToTop from "./components/ScrollToTop";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import { capitalizeString } from "./utils/utils";
+import Pokedex from "./pages/Pokedex";
 
 function App() {
   const [pokemonQuery, setPokemonQuery] = useState({
@@ -18,7 +16,6 @@ function App() {
     limit: 151,
     region: "Kanto",
   });
-  console.log("rendered");
   const pokemon = usePokemon(pokemonQuery.startId, pokemonQuery.limit);
   const pokemonDetails = usePokemonDetails(pokemon);
   const [favorites, setFavorites] = useState([]);
@@ -54,26 +51,19 @@ function App() {
       <main className="bg-slate-700 pb-10 min-h-screen">
         <ScrollToTop />
         <Routes>
+          <Route index element={<Navigate replace to="pokedex" />} />
           <Route
-            path="/"
+            path="pokedex"
             element={
-              <>
-                <Toaster position="top-center" />
-                <SelectGeneration
-                  pokemonQuery={pokemonQuery}
-                  setPokemonQuery={setPokemonQuery}
-                />
-                <SearchBar
-                  searchInput={searchInput}
-                  setSearchInput={setSearchInput}
-                />
-                <PokemonList
-                  pokemonDetails={pokemonDetails}
-                  addToFavorites={addToFavorites}
-                  favorites={favorites}
-                  searchInput={searchInput}
-                />
-              </>
+              <Pokedex
+                pokemonQuery={pokemonQuery}
+                setPokemonQuery={setPokemonQuery}
+                searchInput={searchInput}
+                setSearchInput={setSearchInput}
+                pokemonDetails={pokemonDetails}
+                addToFavorites={addToFavorites}
+                favorites={favorites}
+              />
             }
           />
           <Route path="/:pokemon" element={<Details />} />
