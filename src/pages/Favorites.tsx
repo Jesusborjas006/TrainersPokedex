@@ -37,7 +37,7 @@ const Favorites = ({ favorites, removeFromFavorites }: FavoritesProps) => {
                 #{formattedPokemonId(String(pokemon.id))}
               </p>
               <div className="w-[120px] h-auto mx-auto">
-                <Link to={`../${pokemon.name}`}>
+                <Link to={`/pokedex/${pokemon.name}`}>
                   <img
                     className="mx-auto bg-gray-300 p-2 border-2 border-white rounded-full hover:bg-green-200"
                     src={pokemon.sprites[0]}
@@ -46,7 +46,7 @@ const Favorites = ({ favorites, removeFromFavorites }: FavoritesProps) => {
                 </Link>
               </div>
               <h3 className="text-lg font-medium hover:underline hover:text-blue-700 inline-block">
-                <Link to={`../${pokemon.name}`}>{pokemon.name}</Link>
+                <Link to={`/pokedex/${pokemon.name}`}>{pokemon.name}</Link>
               </h3>
               <div className="flex justify-center gap-x-2 mt-2 text-white">
                 {pokemon.types.map((type) => (
