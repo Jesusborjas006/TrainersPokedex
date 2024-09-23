@@ -66,7 +66,7 @@ const PokemonStatsComparison = () => {
 
   return (
     <>
-      <header>{<Navbar />}</header>
+      <Navbar />
       <section className="max-w-[1250px] mx-auto px-4 ">
         <button className="my-6 text-white" onClick={() => navigate(-1)}>
           &larr; Go Back

@@ -44,7 +44,7 @@ const Pokedex = ({
 }: PokedexProps) => {
   return (
     <>
-      <header>{<Navbar />}</header>
+      <Navbar />
       <Toaster position="top-center" />
       <SelectGeneration
         pokemonQuery={pokemonQuery}

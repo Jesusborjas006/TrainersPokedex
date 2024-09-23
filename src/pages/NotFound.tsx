@@ -12,7 +12,7 @@ const NotFound = () => {
   if (isPending) return <LoadingSpinner />;
 
   return (
-    <section className="border border-red-500 flex items-center justify-center h-screen text-center">
+    <section className="flex items-center justify-center h-screen text-center">
       <div className="bg-white p-10 rounded-lg">
         <img
           className="w-1/2 mx-auto"

@@ -46,7 +46,7 @@ function App() {
 
   return (
     <>
-      <main className="bg-slate-700 min-h-screen">
+      <main className="bg-slate-700 min-h-screen relative">
         <ScrollToTop />
         <Routes>
           <Route index element={<Navigate replace to="pokedex" />} />
