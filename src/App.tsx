@@ -66,7 +66,7 @@ function App() {
               />
             }
           />
-          <Route path="/:pokemon" element={<Details />} />
+          <Route path="pokedex/:pokemon" element={<Details />} />
           <Route
             path="pokedex/favorites"
             element={
