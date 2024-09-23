@@ -9,6 +9,7 @@ import ScrollToTop from "./components/ScrollToTop";
 import toast from "react-hot-toast";
 import { capitalizeString } from "./utils/utils";
 import Pokedex from "./pages/Pokedex";
+import NotFound from "./pages/NotFound";
 
 function App() {
   const [pokemonQuery, setPokemonQuery] = useState({
@@ -80,6 +81,7 @@ function App() {
             path="/pokemon/compare-stats"
             element={<PokemonStatsComparison />}
           />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
     </>
