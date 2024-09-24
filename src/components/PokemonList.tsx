@@ -56,7 +56,7 @@ const PokemonList = ({
   if (areAnyFailing) return <span>Can't load pokemon data</span>;
 
   const searchedPokemon = pokemonDetails.filter((pokemon) => {
-    return pokemon.data?.name.includes(searchInput);
+    return pokemon.data?.name.includes(searchInput.toLowerCase());
   });
 
   const pokemonElements = searchedPokemon.map(
@@ -73,7 +73,17 @@ const PokemonList = ({
         />
       )
   );
-  return <ListGrid>{pokemonElements}</ListGrid>;
+  return (
+    <>
+      {searchedPokemon.length ? (
+        <ListGrid>{pokemonElements}</ListGrid>
+      ) : (
+        <div className="text-center pt-12 text-white">
+          <p>No results for "{searchInput}"</p>
+        </div>
+      )}
+    </>
+  );
 };
 
 export default PokemonList;

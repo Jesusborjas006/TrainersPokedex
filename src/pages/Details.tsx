@@ -6,6 +6,7 @@ import { TypeColorTypes } from "../types/pokemon";
 import StatsBar from "../components/StatsBar";
 import { getPokemonInfo } from "../services/api";
 import LoadingSpinner from "../ui/LoadingSpinner";
+import Navbar from "../ui/Navbar";
 
 const Details = () => {
   const navigate = useNavigate();
@@ -106,12 +107,15 @@ const Details = () => {
   }
 
   return (
-    <section className="max-w-[1200px] mx-auto">
-      <button className="my-6 text-white" onClick={() => navigate(-1)}>
-        &larr; Go Back
-      </button>
-      {detailsContent}
-    </section>
+    <>
+      {<Navbar />}
+      <section className="max-w-[1200px] mx-auto">
+        <button className="my-6 text-white" onClick={() => navigate(-1)}>
+          &larr; Go Back
+        </button>
+        {detailsContent}
+      </section>
+    </>
   );
 };
 
