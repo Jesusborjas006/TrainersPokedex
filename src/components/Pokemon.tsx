@@ -58,7 +58,7 @@ const Pokemon = ({
       <p className="absolute right-2 top-2 text-sm text-blue-900">
         #{formattedPokemonId(String(id))}
       </p>
-      <div className="min-w-[80px] w-[65%] h-auto mx-auto mt-2">
+      <div className="w-[90px] sm:w-full h-auto mx-auto mt-2 ">
         <Link to={name}>
           <img
             className="mx-auto bg-gray-300 p-1 border-2 border-white rounded-full hover:bg-green-200"
