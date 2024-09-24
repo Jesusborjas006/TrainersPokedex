@@ -50,33 +50,30 @@ const Details = () => {
     );
   } else {
     detailsContent = (
-      <div className="bg-slate-100 py-8 rounded-xl">
-        <h2 className="text-center capitalize text-2xl font-semibold pb-4">
+      <div className="bg-slate-100 pt-8 pb-12 rounded-xl">
+        <h2 className="text-center capitalize text-lg sm:text-xl md:text-2xl font-semibold pb-4">
           {pokemonInfo.name}{" "}
-          <span className=" font-light">
+          <span className="font-light">
             | #{formattedPokemonId(String(pokemonInfo.id))}
           </span>
         </h2>
-        <div className="flex w-[90%] justify-center gap-x-6 mx-auto py-4">
-          <div className="w-[35%]">
+        <div className="flex flex-col items-center w-[90%] mx-auto border">
+          <div>
             <img
-              className="object-cover bg-gray-300 rounded-lg"
+              className="object-cover bg-gray-300 rounded-lg "
               src={pokemonInfo.sprites[1]}
               alt={pokemonInfo.name}
             />
           </div>
-          <div className="w-[55%] space-y-2">
+          <div className="pt-4">
             <p>{pokemonSpecies.data?.description}</p>
-            <h3 className="text-xl font-medium">Type</h3>
+            <h3 className="text-xl py-4">Type</h3>
             <ul className="flex gap-x-2 capitalize text-center text-white">
               {pokemonInfo.types.map((type) => (
                 <li
+                  className="py-1 rounded-md inline-block w-[75px] font-medium"
                   style={{
                     backgroundColor: typeColors[type as keyof TypeColorTypes],
-                    padding: "2px 0",
-                    borderRadius: "4px",
-                    display: "inline-block",
-                    width: "70px",
                   }}
                   key={type}
                 >
@@ -84,21 +81,25 @@ const Details = () => {
                 </li>
               ))}
             </ul>
-            <p>Height: {pokemonInfo.height}</p>
-            <p>Weight: {pokemonInfo.weight}</p>
-            <p>
-              Growth Rate:{" "}
-              <span className="capitalize">
-                {pokemonSpecies.data?.growth_rate}
-              </span>
-            </p>
-            <p className="capitalize">Ability: {pokemonInfo.ability.name}</p>
-            <p>{pokemonAbility.data?.abilityEffect}</p>
+            <ul className="pt-8 space-y-2">
+              <li>Height: {pokemonInfo.height}</li>
+              <li>Weight: {pokemonInfo.weight} lbs</li>
+              <li>
+                Growth Rate:{" "}
+                <span className="capitalize">
+                  {pokemonSpecies.data?.growth_rate}
+                </span>
+              </li>
+              <li className="capitalize">
+                Ability: {pokemonInfo.ability.name}
+              </li>
+              <li>{pokemonAbility.data?.abilityEffect}</li>
+            </ul>
           </div>
         </div>
-        <div className="h-[500px] mt-20 ">
-          <h3 className="text-center text-xl font-medium">
-            Pokemon Base Stats
+        <div className="h-[500px]  ">
+          <h3 className="text-center text-xl font-medium my-10 capitalize">
+            {pokemonInfo.name}'s Base Stats
           </h3>
           <StatsBar formattedStats={formattedStats} />
         </div>
@@ -109,8 +110,8 @@ const Details = () => {
   return (
     <>
       {<Navbar />}
-      <section className="max-w-[1200px] mx-auto">
-        <button className="my-6 text-white" onClick={() => navigate(-1)}>
+      <section className="max-w-[1250px] mx-auto px-4 sm:px-6 md:px-10 pt-6 pb-10">
+        <button className="mb-4 text-white" onClick={() => navigate(-1)}>
           &larr; Go Back
         </button>
         {detailsContent}
