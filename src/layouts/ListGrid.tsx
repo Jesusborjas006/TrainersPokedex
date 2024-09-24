@@ -1,6 +1,6 @@
 const ListGrid = ({ children }) => {
   return (
-    <div className="grid grid-cols-3 gap-8 pt-10 text-center max-w-[1200px] mx-auto">
+    <div className="grid grid-cols-2 md:grid-cols-3 px-2 sm:px-6 md:px-10 gap-4 pt-10 text-center max-w-[1250px] mx-auto">
       {children}
     </div>
   );

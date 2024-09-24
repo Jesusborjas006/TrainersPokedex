@@ -1,6 +1,6 @@
 const Card = ({ children }) => {
   return (
-    <div className="border-4 rounded-xl capitalize bg-slate-100 py-6 relative">
+    <div className="border-2 rounded-xl capitalize bg-slate-100 py-6 relative">
       {children}
     </div>
   );
