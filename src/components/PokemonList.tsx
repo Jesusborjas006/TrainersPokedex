@@ -56,7 +56,7 @@ const PokemonList = ({
   if (areAnyFailing) return <span>Can't load pokemon data</span>;
 
   const searchedPokemon = pokemonDetails.filter((pokemon) => {
-    return pokemon.data?.name.includes(searchInput);
+    return pokemon.data?.name.includes(searchInput.toLowerCase());
   });
 
   const pokemonElements = searchedPokemon.map(
