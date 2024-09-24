@@ -12,13 +12,13 @@ const PokemonStatsComparison = () => {
   const [pokemonComparison2, setPokemonComparison2] = useState("");
   const firstPokemon = useQuery({
     queryKey: ["comparisons", pokemonComparison1],
-    queryFn: () => getPokemonDetails(pokemonComparison1),
+    queryFn: () => getPokemonDetails(pokemonComparison1.toLowerCase()),
     enabled: pokemonComparison1 !== "",
   });
 
   const secondPokemon = useQuery({
     queryKey: ["comparisons", pokemonComparison2],
-    queryFn: () => getPokemonDetails(pokemonComparison2),
+    queryFn: () => getPokemonDetails(pokemonComparison2.toLowerCase()),
     enabled: pokemonComparison2 !== "",
   });
 
