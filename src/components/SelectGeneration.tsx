@@ -1,6 +1,6 @@
 const SelectGeneration = ({ pokemonQuery, setPokemonQuery }) => {
   return (
-    <div className="flex flex-col gap-y-4 sm:flex-row justify-between items-center max-w-[1200px] mx-auto pt-10 px-4 sm:px-6 md:px-10">
+    <div className="flex flex-col gap-y-3 sm:flex-row justify-between items-center max-w-[1200px] mx-auto pt-10 px-4 sm:px-6 md:px-10">
       <h2 className="text-white font-semibold text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
         {pokemonQuery.region} Region
       </h2>
