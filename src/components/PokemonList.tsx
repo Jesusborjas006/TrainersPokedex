@@ -73,7 +73,17 @@ const PokemonList = ({
         />
       )
   );
-  return <ListGrid>{pokemonElements}</ListGrid>;
+  return (
+    <>
+      {searchedPokemon.length ? (
+        <ListGrid>{pokemonElements}</ListGrid>
+      ) : (
+        <div className="text-center pt-12 text-white">
+          <p>No results for "{searchInput}"</p>
+        </div>
+      )}
+    </>
+  );
 };
 
 export default PokemonList;
