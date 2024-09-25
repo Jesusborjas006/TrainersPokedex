@@ -22,14 +22,19 @@ const Favorites = ({ favorites, removeFromFavorites }: FavoritesProps) => {
   return (
     <>
       <Navbar />
-      <section className="max-w-[1200px] mx-auto">
+      <section className="max-w-[1250px] mx-auto pt-6 pb-10">
         <Toaster position="top-center" />
-        <button className="my-6 text-white" onClick={() => navigate(-1)}>
+        <button
+          className="mb-8 text-white px-4 sm:px-6 md:px-10"
+          onClick={() => navigate(-1)}
+        >
           &larr; Go Back
         </button>
-        <h3 className="text-white text-center text-2xl">Favorites</h3>
+        <h3 className="text-white text-center text-xl sm:text-2xl">
+          Favorites
+        </h3>
         {favorites.length <= 0 ? (
-          <p className="text-white text-center pt-10">
+          <p className="text-white text-center pt-6">
             No favorited Pokemon to display.
           </p>
         ) : (
@@ -39,29 +44,25 @@ const Favorites = ({ favorites, removeFromFavorites }: FavoritesProps) => {
                 <p className="absolute right-2 top-2 text-sm text-blue-900">
                   #{formattedPokemonId(String(pokemon.id))}
                 </p>
-                <div className="w-[120px] h-auto mx-auto">
+                <div className="w-[90px] sm:w-full h-auto mx-auto mt-2">
                   <Link to={`/pokedex/${pokemon.name}`}>
                     <img
-                      className="mx-auto bg-gray-300 p-2 border-2 border-white rounded-full hover:bg-green-200"
+                      className="mx-auto bg-gray-300 p-1 border-2 border-white rounded-full hover:bg-green-200"
                       src={pokemon.sprites[0]}
                       alt={pokemon.name}
                     />
                   </Link>
                 </div>
-                <h3 className="text-lg font-medium hover:underline hover:text-blue-700 inline-block">
+                <h3 className="font-medium hover:underline hover:text-blue-700 inline-block md:text-lg">
                   <Link to={`/pokedex/${pokemon.name}`}>{pokemon.name}</Link>
                 </h3>
-                <div className="flex justify-center gap-x-2 mt-2 text-white">
+                <div className="flex justify-center gap-x-1 mt-2 text-white">
                   {pokemon.types.map((type) => (
                     <p
+                      className="py-[2px] rounded-[4px] inline-block text-sm w-[65px] md:w-[75px]"
                       style={{
                         backgroundColor:
                           typeColors[type as keyof TypeColorTypes],
-                        padding: "2px 0",
-                        borderRadius: "4px",
-                        display: "inline-block",
-                        fontSize: "14px",
-                        width: "70px",
                       }}
                       key={type}
                     >
@@ -76,7 +77,7 @@ const Favorites = ({ favorites, removeFromFavorites }: FavoritesProps) => {
                     );
                     removeFromFavorites(pokemon.id);
                   }}
-                  className="border relative top-4 px-2 py-1 bg-red-700 text-white hover:bg-red-500 text-sm rounded-mg"
+                  className="border relative top-4 px-2 py-1 bg-red-700 text-white hover:bg-red-500 text-sm rounded-md"
                 >
                   Remove
                 </button>

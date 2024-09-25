@@ -48,7 +48,7 @@ const StatsBar = ({ formattedStats }: StatsBarProps) => {
           textAnchor={labelAngle ? "end" : "middle"}
           interval={0}
         />
-        <YAxis dataKey="base_stat" domain={[0, 200]} />
+        <YAxis dataKey="base_stat" />
       </BarChart>
     </ResponsiveContainer>
   );

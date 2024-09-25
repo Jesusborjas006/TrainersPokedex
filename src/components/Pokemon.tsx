@@ -50,7 +50,7 @@ const Pokemon = ({
   return (
     <Card>
       <button
-        className="absolute top-2 left-2 text-4xl hover:text-yellow-500"
+        className="absolute top-0 left-1 text-3xl md:text-4xl hover:text-yellow-500"
         onClick={() => addToFavorites(id)}
       >
         {starContent}
@@ -58,29 +58,25 @@ const Pokemon = ({
       <p className="absolute right-2 top-2 text-sm text-blue-900">
         #{formattedPokemonId(String(id))}
       </p>
-      <div className="w-[120px] h-auto mx-auto">
+      <div className="w-[90px] sm:w-[200px] h-auto mx-auto mt-2">
         <Link to={name}>
           <img
-            className="mx-auto bg-gray-300 p-2 border-2 border-white rounded-full hover:bg-green-200"
+            className="mx-auto bg-gray-300 p-1 border-2 border-white rounded-full hover:bg-green-200"
             src={images[0]}
             alt={name}
           />
         </Link>
       </div>
-      <h3 className="text-lg font-medium hover:underline hover:text-blue-700 inline-block">
+      <h3 className="font-medium hover:underline hover:text-blue-700 inline-block md:text-lg">
         <Link to={name}>{name}</Link>
       </h3>
-      <div className="flex justify-center gap-x-2 mt-2 text-white">
+      <div className="flex justify-center gap-x-1 md:gap-x-2 mt-2 text-white">
         {types.map((type) => (
           <p
             style={{
               backgroundColor: typeColors[type as keyof TypeColorTypes],
-              padding: "2px 0",
-              borderRadius: "4px",
-              display: "inline-block",
-              fontSize: "14px",
-              width: "70px",
             }}
+            className="py-[2px] rounded-[4px] inline-block text-sm w-[65px] md:w-[75px]"
             key={type}
           >
             {type}

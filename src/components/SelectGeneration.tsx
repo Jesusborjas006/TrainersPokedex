@@ -1,11 +1,11 @@
 const SelectGeneration = ({ pokemonQuery, setPokemonQuery }) => {
   return (
-    <div className="flex justify-between items-center max-w-[1200px] mx-auto pt-10">
-      <h2 className="text-white text-5xl font-semibold ">
+    <div className="flex flex-col gap-y-3 sm:flex-row justify-between items-center max-w-[1250px] mx-auto pt-10 px-4 sm:px-6 md:px-10">
+      <h2 className="text-white font-semibold text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
         {pokemonQuery.region} Region
       </h2>
       <select
-        className="w-[200px] p-1 rounded-sm"
+        className="p-1 rounded-sm"
         value={`${pokemonQuery.startId}-${pokemonQuery.limit}-${pokemonQuery.region}`}
         onChange={(e) => {
           const [startId, limit, region] = e.target.value.split("-");
