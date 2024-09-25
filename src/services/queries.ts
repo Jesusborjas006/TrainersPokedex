@@ -5,7 +5,7 @@ import {
   getPokemonDetails,
   getPokemonSpecies,
 } from "./api";
-import { PokemonType } from "../types/pokemon";
+import { PokemonFavoriteTypes, PokemonType } from "../types/pokemon";
 
 export const usePokemon = (startId: number, limit: number) => {
   return useQuery({
@@ -16,14 +16,16 @@ export const usePokemon = (startId: number, limit: number) => {
 
 export const usePokemonDetails = (
   pokemonData: UseQueryResult<PokemonType, Error>
-) => {
+): UseQueryResult<PokemonFavoriteTypes[], Error[]> => {
   return useQueries({
-    queries: (pokemonData.data?.results ?? []).map((pokemon) => {
-      return {
-        queryKey: ["pokemon", pokemon.name, "pokemonDetails"],
-        queryFn: () => getPokemonDetails(pokemon.name),
-      };
-    }),
+    queries: (pokemonData.data?.results ?? []).map(
+      (pokemon: { name: string }) => {
+        return {
+          queryKey: ["pokemon", pokemon.name, "pokemonDetails"],
+          queryFn: () => getPokemonDetails(pokemon.name),
+        };
+      }
+    ),
   });
 };
 

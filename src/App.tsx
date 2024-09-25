@@ -9,6 +9,8 @@ import toast from "react-hot-toast";
 import { capitalizeString } from "./utils/utils";
 import Pokedex from "./pages/Pokedex";
 import NotFound from "./pages/NotFound";
+import { PokemonFavoriteTypes } from "./types/pokemon";
+import { UseQueryResult } from "@tanstack/react-query";
 
 function App() {
   const [pokemonQuery, setPokemonQuery] = useState({
@@ -18,15 +20,16 @@ function App() {
   });
   const pokemon = usePokemon(pokemonQuery.startId, pokemonQuery.limit);
   const pokemonDetails = usePokemonDetails(pokemon);
-  const [favorites, setFavorites] = useState([]);
+  const [favorites, setFavorites] = useState<PokemonFavoriteTypes[]>([]);
   const [searchInput, setSearchInput] = useState("");
 
   const addToFavorites = (pokemonId: number) => {
     const pokemonFavoritedData = pokemonDetails.find((pokemon) => {
-      return pokemon.data?.id === pokemonId;
+      return pokemon.data.id === pokemonId;
     });
     const namesInFavorites = favorites.map((pokemon) => pokemon.name);
-    const pokemonNameFavorited = pokemonFavoritedData?.data?.name;
+    const pokemonNameFavorited = pokemonFavoritedData.data.name;
+    console.log(pokemonNameFavorited);
 
     if (!namesInFavorites.includes(pokemonNameFavorited)) {
       setFavorites([...favorites, pokemonFavoritedData.data]);

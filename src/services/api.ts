@@ -1,4 +1,4 @@
-import { PokemonType } from "../types/pokemon";
+import { PokemonFavoriteTypes, PokemonType } from "../types/pokemon";
 
 const BASE_URL = "https://pokeapi.co/api/v2";
 
@@ -15,7 +15,9 @@ export const getPokemon = async (startId: number, limit: number) => {
   return data;
 };
 
-export const getPokemonDetails = async (pokemonName: string) => {
+export const getPokemonDetails = async (
+  pokemonName: string
+): Promise<PokemonFavoriteTypes> => {
   const response = await fetch(`${BASE_URL}/pokemon/${pokemonName}`);
 
   if (!response.ok) {
@@ -38,8 +40,8 @@ export const getPokemonDetails = async (pokemonName: string) => {
     weight,
     height,
     stats,
-    ability: abilities[0].ability,
-  };
+    ability: abilities.length > 0 ? abilities[0].ability : null,
+  } as PokemonFavoriteTypes;
 };
 
 export const getPokemonSpecies = async (pokemonName: string) => {
