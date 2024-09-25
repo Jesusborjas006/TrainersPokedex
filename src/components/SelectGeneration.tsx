@@ -1,4 +1,22 @@
-const SelectGeneration = ({ pokemonQuery, setPokemonQuery }) => {
+interface SelectGenerationProps {
+  pokemonQuery: {
+    startId: number;
+    limit: number;
+    region: string;
+  };
+  setPokemonQuery: React.Dispatch<
+    React.SetStateAction<{
+      startId: number;
+      limit: number;
+      region: string;
+    }>
+  >;
+}
+
+const SelectGeneration = ({
+  pokemonQuery,
+  setPokemonQuery,
+}: SelectGenerationProps) => {
   return (
     <div className="flex flex-col gap-y-3 sm:flex-row justify-between items-center max-w-[1250px] mx-auto pt-10 px-4 sm:px-6 md:px-10">
       <h2 className="text-white font-semibold text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
