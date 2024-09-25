@@ -5,7 +5,7 @@ import {
   getPokemonDetails,
   getPokemonSpecies,
 } from "./api";
-import { PokemonFavoriteTypes, PokemonType } from "../types/pokemon";
+import { PokemonType } from "../types/pokemon";
 
 export const usePokemon = (startId: number, limit: number) => {
   return useQuery({
@@ -16,7 +16,7 @@ export const usePokemon = (startId: number, limit: number) => {
 
 export const usePokemonDetails = (
   pokemonData: UseQueryResult<PokemonType, Error>
-): UseQueryResult<PokemonFavoriteTypes[], Error[]> => {
+) => {
   return useQueries({
     queries: (pokemonData.data?.results ?? []).map(
       (pokemon: { name: string }) => {

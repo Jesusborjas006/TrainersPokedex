@@ -10,7 +10,6 @@ import { capitalizeString } from "./utils/utils";
 import Pokedex from "./pages/Pokedex";
 import NotFound from "./pages/NotFound";
 import { PokemonFavoriteTypes } from "./types/pokemon";
-import { UseQueryResult } from "@tanstack/react-query";
 
 function App() {
   const [pokemonQuery, setPokemonQuery] = useState({
@@ -25,24 +24,26 @@ function App() {
 
   const addToFavorites = (pokemonId: number) => {
     const pokemonFavoritedData = pokemonDetails.find((pokemon) => {
-      return pokemon.data.id === pokemonId;
+      return pokemon.data?.id === pokemonId;
     });
-    const namesInFavorites = favorites.map((pokemon) => pokemon.name);
-    const pokemonNameFavorited = pokemonFavoritedData.data.name;
-    console.log(pokemonNameFavorited);
 
-    if (!namesInFavorites.includes(pokemonNameFavorited)) {
+    const namesInFavorites = favorites.map((pokemon) => pokemon?.name);
+    const pokemonNameFavorited = pokemonFavoritedData?.data?.name;
+
+    if (
+      pokemonNameFavorited &&
+      !namesInFavorites.includes(pokemonNameFavorited)
+    ) {
       setFavorites([...favorites, pokemonFavoritedData.data]);
       toast.success(
         capitalizeString(`${pokemonNameFavorited} added to favorites.`)
       );
     }
-    return;
   };
 
   const removeFromFavorites = (pokemonId: number) => {
     const updatedFavorites = favorites.filter((pokemon) => {
-      return pokemon.id !== pokemonId;
+      return pokemon?.id !== pokemonId;
     });
     setFavorites(updatedFavorites);
   };
