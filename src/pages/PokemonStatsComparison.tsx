@@ -8,8 +8,8 @@ import Navbar from "../ui/Navbar";
 
 const PokemonStatsComparison = () => {
   const navigate = useNavigate();
-  const [pokemonComparison1, setPokemonComparison1] = useState("");
-  const [pokemonComparison2, setPokemonComparison2] = useState("");
+  const [pokemonComparison1, setPokemonComparison1] = useState("1");
+  const [pokemonComparison2, setPokemonComparison2] = useState("4");
   const firstPokemon = useQuery({
     queryKey: ["comparisons", pokemonComparison1],
     queryFn: () => getPokemonDetails(pokemonComparison1.toLowerCase()),
@@ -67,15 +67,15 @@ const PokemonStatsComparison = () => {
   return (
     <>
       <Navbar />
-      <section className="max-w-[1250px] mx-auto px-4 ">
-        <button className="my-6 text-white" onClick={() => navigate(-1)}>
+      <section className="max-w-[1250px] mx-auto px-4 sm:px-6 md:px-10">
+        <button className="my-4 text-white" onClick={() => navigate(-1)}>
           &larr; Go Back
         </button>
-        <div className="flex justify-around py-6 gap-x-10">
+        <div className="flex flex-col sm:flex-row sm:justify-around sm:gap-x-4 pt-4 gap-y-6">
           <div>
-            <label className="text-white">Name or ID:</label>
+            <label className="text-white sm:mr-2">(1) Name or ID:</label>
             <input
-              className="border pl-1 ml-1"
+              className="border pl-1 w-full mt-1 sm:w-auto"
               type="text"
               placeholder="Search Pokemon..."
               value={pokemonComparison1}
@@ -83,9 +83,9 @@ const PokemonStatsComparison = () => {
             />
           </div>
           <div>
-            <label className="text-white">Name or ID:</label>
+            <label className="text-white sm:mr-2">(2) Name or ID:</label>
             <input
-              className="border pl-1 ml-1"
+              className="border pl-1 w-full mt-1 sm:w-auto"
               type="text"
               placeholder="Search Pokemon..."
               value={pokemonComparison2}
@@ -93,25 +93,25 @@ const PokemonStatsComparison = () => {
             />
           </div>
         </div>
-        <div className="flex flex-col space-y-10 gap-x-10 md:flex-row md:space-y-0">
+        <div className="flex flex-col py-10 space-y-10 gap-x-10 md:flex-row md:space-y-0">
           {firstPokemon.status === "success" ? (
             <>
               <div className="bg-white rounded-xl flex-1 ">
-                <div className="p-6">
+                <div className="p-4">
                   <img
                     className="bg-gray-300 rounded-lg mx-auto w-[40%] p-4"
                     src={firstPokemon.data.sprites[1]}
                     alt={firstPokemon.data.name}
                   />
                 </div>
-                <h3 className="text-center capitalize text-xl font-medium pb-4">
+                <h3 className="text-center capitalize text-lg font-medium pb-4">
                   {firstPokemon.data.name}
                   <span className=" font-light">
                     {" "}
                     | #{formattedPokemonId(String(firstPokemon.data.id))}
                   </span>
                 </h3>
-                <div className="h-[300px] md:h-[350px]">
+                <div className="h-[300px] md:h-[350px] mt-6">
                   <ResponsiveContainer
                     width="100%"
                     height="100%"
@@ -129,7 +129,7 @@ const PokemonStatsComparison = () => {
                         angle={-45}
                         textAnchor="end"
                       />
-                      <YAxis dataKey="base_stat" domain={[0, 200]} />
+                      <YAxis dataKey="base_stat" />
                     </BarChart>
                   </ResponsiveContainer>
                 </div>
@@ -145,7 +145,7 @@ const PokemonStatsComparison = () => {
           {secondPokemon.status === "success" ? (
             <>
               <div className="bg-white rounded-xl flex-1">
-                <div className="p-6">
+                <div className="p-4">
                   <img
                     className="bg-gray-300 rounded-lg mx-auto w-[40%] p-4"
                     src={secondPokemon.data.sprites[1]}
@@ -159,7 +159,7 @@ const PokemonStatsComparison = () => {
                     | #{formattedPokemonId(String(secondPokemon.data.id))}
                   </span>
                 </h3>
-                <div className="h-[300px] md:h-[350px]">
+                <div className="h-[300px] md:h-[350px] mt-6">
                   <ResponsiveContainer
                     width="100%"
                     height="100%"
@@ -177,7 +177,7 @@ const PokemonStatsComparison = () => {
                         angle={-45}
                         textAnchor="end"
                       />
-                      <YAxis dataKey="base_stat" domain={[0, 200]} />
+                      <YAxis dataKey="base_stat" />
                     </BarChart>
                   </ResponsiveContainer>
                 </div>
