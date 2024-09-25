@@ -51,16 +51,16 @@ const Details = () => {
   } else {
     detailsContent = (
       <div className="bg-slate-100 pt-8 pb-12 rounded-xl">
-        <h2 className="text-center capitalize text-lg sm:text-xl md:text-2xl font-semibold pb-4">
+        <h2 className="text-center capitalize text-lg sm:text-xl md:text-2xl font-semibold pb-8">
           {pokemonInfo.name}{" "}
           <span className="font-light">
             | #{formattedPokemonId(String(pokemonInfo.id))}
           </span>
         </h2>
-        <div className="flex flex-col items-center w-[90%] mx-auto border">
+        <div className="max-w-[500px] gap-x-4 mx-auto px-4 lg:max-w-none lg:grid lg:grid-cols-2 lg:px-8">
           <div>
             <img
-              className="object-cover bg-gray-300 rounded-lg "
+              className="object-cover bg-gray-300 rounded-lg mb-2"
               src={pokemonInfo.sprites[1]}
               alt={pokemonInfo.name}
             />
@@ -97,8 +97,8 @@ const Details = () => {
             </ul>
           </div>
         </div>
-        <div className="h-[500px]  ">
-          <h3 className="text-center text-xl font-medium my-10 capitalize">
+        <div className="h-[500px]">
+          <h3 className="text-center text-lg sm:text-xl font-medium my-10 capitalize">
             {pokemonInfo.name}'s Base Stats
           </h3>
           <StatsBar formattedStats={formattedStats} />
