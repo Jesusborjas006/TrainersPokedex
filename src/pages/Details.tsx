@@ -57,7 +57,7 @@ const Details = () => {
             | #{formattedPokemonId(String(pokemonInfo.id))}
           </span>
         </h2>
-        <div className="max-w-[500px] gap-x-4 mx-auto px-4 lg:max-w-none lg:grid lg:grid-cols-2 lg:px-8">
+        <div className="max-w-[500px] gap-x-4 mx-auto px-4 lg:max-w-none lg:grid lg:grid-cols-2 lg:px-10">
           <div>
             <img
               className="object-cover bg-gray-300 rounded-lg mb-2"
