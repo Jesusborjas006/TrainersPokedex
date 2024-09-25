@@ -7,26 +7,7 @@ import { PokemonFavoriteTypes } from "../types/pokemon";
 interface PokemonListProps {
   pokemonDetails: UseQueryResult<PokemonFavoriteTypes, Error>[];
   addToFavorites: (pokemonId: number) => void;
-  favorites: {
-    name: string;
-    id: number;
-    sprites: string[];
-    types: string[];
-    weight: number;
-    height: number;
-    stats: {
-      base_stat: number;
-      effort: number;
-      stat: {
-        name: string;
-        url: string;
-      };
-    }[];
-    ability: {
-      name: string;
-      url: string;
-    };
-  }[];
+  favorites: [] | PokemonFavoriteTypes[];
   searchInput: string;
 }
 

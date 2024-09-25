@@ -23,7 +23,7 @@ interface PokedexProps {
   setSearchInput: React.Dispatch<React.SetStateAction<string>>;
   pokemonDetails: UseQueryResult<PokemonFavoriteTypes, Error>[];
   addToFavorites: (pokemonId: number) => void;
-  favorites: never[];
+  favorites: [] | PokemonFavoriteTypes[];
 }
 
 const Pokedex = ({

@@ -19,7 +19,7 @@ function App() {
   });
   const pokemon = usePokemon(pokemonQuery.startId, pokemonQuery.limit);
   const pokemonDetails = usePokemonDetails(pokemon);
-  const [favorites, setFavorites] = useState<PokemonFavoriteTypes[]>([]);
+  const [favorites, setFavorites] = useState<PokemonFavoriteTypes[] | []>([]);
   const [searchInput, setSearchInput] = useState("");
 
   const addToFavorites = (pokemonId: number) => {
