@@ -1,4 +1,8 @@
-import { PokemonFavoriteTypes, PokemonType } from "../types/pokemon";
+import {
+  PokemonAbility,
+  PokemonFavoriteTypes,
+  PokemonType,
+} from "../types/pokemon";
 
 const BASE_URL = "https://pokeapi.co/api/v2";
 
@@ -74,7 +78,7 @@ export const getPokemonAbility = async (path: string) => {
         return effect.language.name === "en";
       }
     ).effect,
-  };
+  } as PokemonAbility;
 };
 
 export const getPokemonInfo = async (pokemonName: string) => {

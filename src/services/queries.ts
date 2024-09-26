@@ -37,10 +37,15 @@ export const usePokemonSpecies = (pokemonName: string) => {
   });
 };
 
-export const usePokemonAbility = (path: string) => {
+export const usePokemonAbility = (path: string | undefined) => {
   return useQuery({
     queryKey: ["abilities", path],
-    queryFn: () => getPokemonAbility(path),
-    enabled: Boolean(path),
+    queryFn: () => {
+      if (!path) {
+        return Promise.reject("No path provided");
+      }
+      return getPokemonAbility(path);
+    },
+    enabled: !!path,
   });
 };

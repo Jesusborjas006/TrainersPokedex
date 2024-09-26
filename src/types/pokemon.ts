@@ -70,3 +70,7 @@ export interface PokemonInterface {
     url: string;
   };
 }
+
+export type PokemonAbility = {
+  abilityEffect: string;
+};

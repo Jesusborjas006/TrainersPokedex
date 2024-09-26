@@ -20,10 +20,11 @@ const Details = () => {
     queryKey: ["pokemonDetails", pokemonEndpoint.pokemon],
     queryFn: () => getPokemonInfo(pokemon!),
   });
+  const abilityUrl = pokemonInfo?.ability.url || "";
   const pokemonSpecies = usePokemonSpecies(pokemon!);
-  const pokemonAbility = usePokemonAbility(pokemonInfo?.ability.url);
+  const pokemonAbility = usePokemonAbility(abilityUrl);
 
-  console.log(pokemon);
+  console.log(pokemonAbility?.data);
 
   const pokemonStats = pokemonInfo?.stats;
 
