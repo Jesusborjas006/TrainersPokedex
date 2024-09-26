@@ -1,4 +1,8 @@
-import { PokemonType } from "../types/pokemon";
+import {
+  PokemonAbility,
+  PokemonDetailTypes,
+  PokemonType,
+} from "../types/pokemon";
 
 const BASE_URL = "https://pokeapi.co/api/v2";
 
@@ -38,8 +42,8 @@ export const getPokemonDetails = async (pokemonName: string) => {
     weight,
     height,
     stats,
-    ability: abilities[0].ability,
-  };
+    ability: abilities.length > 0 ? abilities[0].ability : null,
+  } as PokemonDetailTypes;
 };
 
 export const getPokemonSpecies = async (pokemonName: string) => {
@@ -74,7 +78,7 @@ export const getPokemonAbility = async (path: string) => {
         return effect.language.name === "en";
       }
     ).effect,
-  };
+  } as PokemonAbility;
 };
 
 export const getPokemonInfo = async (pokemonName: string) => {
@@ -99,6 +103,6 @@ export const getPokemonInfo = async (pokemonName: string) => {
     weight,
     height,
     stats,
-    ability: abilities[0].ability,
-  };
+    ability: abilities.length > 0 ? abilities[0].ability : null,
+  } as PokemonDetailTypes;
 };

@@ -29,25 +29,48 @@ export interface TypeColorTypes {
   flying: string;
 }
 
-export interface PokemonFavoriteTypes {
-  favorites: {
-    name: string;
-    id: number;
-    sprites: string[];
-    types: string[];
-    weight: number;
-    height: number;
-    stats: {
-      base_stat: number;
-      effort: number;
-      stat: {
-        name: string;
-        url: string;
-      };
-    }[];
-    ability: {
+export type PokemonDetailTypes = {
+  name: string;
+  id: number;
+  sprites: string[];
+  types: string[];
+  weight: number;
+  height: number;
+  stats: {
+    base_stat: number;
+    effort: number;
+    stat: {
       name: string;
       url: string;
     };
   }[];
+  ability: {
+    name: string;
+    url: string;
+  };
+};
+
+export interface PokemonInterface {
+  name: string;
+  id: number;
+  sprites: string[];
+  types: string[];
+  weight: number;
+  height: number;
+  stats: {
+    base_stat: number;
+    effort: number;
+    stat: {
+      name: string;
+      url: string;
+    };
+  }[];
+  ability: {
+    name: string;
+    url: string;
+  };
 }
+
+export type PokemonAbility = {
+  abilityEffect: string;
+};

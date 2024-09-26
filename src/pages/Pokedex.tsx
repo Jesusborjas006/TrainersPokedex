@@ -4,6 +4,7 @@ import SearchBar from "../components/SearchBar";
 import PokemonList from "../components/PokemonList";
 import { UseQueryResult } from "@tanstack/react-query";
 import Navbar from "../ui/Navbar";
+import { PokemonDetailTypes } from "../types/pokemon";
 
 interface PokedexProps {
   pokemonQuery: {
@@ -20,17 +21,9 @@ interface PokedexProps {
   >;
   searchInput: string;
   setSearchInput: React.Dispatch<React.SetStateAction<string>>;
-  pokemonDetails: UseQueryResult<
-    {
-      name: string;
-      id: number;
-      sprites: string[];
-      types: string[];
-    },
-    Error
-  >[];
+  pokemonDetails: UseQueryResult<PokemonDetailTypes, Error>[];
   addToFavorites: (pokemonId: number) => void;
-  favorites: never[];
+  favorites: [] | PokemonDetailTypes[];
 }
 
 const Pokedex = ({

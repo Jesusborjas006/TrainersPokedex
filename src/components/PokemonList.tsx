@@ -2,38 +2,12 @@ import { UseQueryResult } from "@tanstack/react-query";
 import Pokemon from "./Pokemon";
 import ListGrid from "../layouts/ListGrid";
 import LoadingSpinner from "../ui/LoadingSpinner";
+import { PokemonDetailTypes } from "../types/pokemon";
 
 interface PokemonListProps {
-  pokemonDetails: UseQueryResult<
-    {
-      name: string;
-      id: number;
-      sprites: string[];
-      types: string[];
-    },
-    Error
-  >[];
+  pokemonDetails: UseQueryResult<PokemonDetailTypes, Error>[];
   addToFavorites: (pokemonId: number) => void;
-  favorites: {
-    name: string;
-    id: number;
-    sprites: string[];
-    types: string[];
-    weight: number;
-    height: number;
-    stats: {
-      base_stat: number;
-      effort: number;
-      stat: {
-        name: string;
-        url: string;
-      };
-    }[];
-    ability: {
-      name: string;
-      url: string;
-    };
-  }[];
+  favorites: [] | PokemonDetailTypes[];
   searchInput: string;
 }
 

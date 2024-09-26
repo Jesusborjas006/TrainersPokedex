@@ -5,14 +5,14 @@ import {
   typeColors,
 } from "../utils/utils";
 import { Link } from "react-router-dom";
-import { TypeColorTypes } from "../types/pokemon";
+import { PokemonDetailTypes, TypeColorTypes } from "../types/pokemon";
 import ListGrid from "../layouts/ListGrid";
 import Card from "../layouts/Card";
 import { Toaster, toast } from "react-hot-toast";
 import Navbar from "../ui/Navbar";
 
 interface FavoritesProps {
-  favorites: never[];
+  favorites: [] | PokemonDetailTypes[];
   removeFromFavorites: (pokemonId: number) => void;
 }
 

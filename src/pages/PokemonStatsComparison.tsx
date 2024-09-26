@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
 import { formattedPokemonId } from "../utils/utils";
 import Navbar from "../ui/Navbar";
+import { PokemonDetailTypes } from "../types/pokemon";
 
 const PokemonStatsComparison = () => {
   const navigate = useNavigate();
@@ -22,7 +23,7 @@ const PokemonStatsComparison = () => {
     enabled: pokemonComparison2 !== "",
   });
 
-  const formatStats = (pokemonStats) => {
+  const formatStats = (pokemonStats: PokemonDetailTypes) => {
     const formattedStats = pokemonStats?.stats.map((stat) => {
       return {
         ...stat,

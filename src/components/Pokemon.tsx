@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { formattedPokemonId, typeColors } from "../utils/utils";
-import { TypeColorTypes } from "../types/pokemon";
+import { PokemonDetailTypes, TypeColorTypes } from "../types/pokemon";
 import Card from "../layouts/Card";
 
 interface PokemonProps {
@@ -9,26 +9,7 @@ interface PokemonProps {
   images: string[];
   types: string[];
   addToFavorites: (pokemonId: number) => void;
-  favorites: {
-    name: string;
-    id: number;
-    sprites: string[];
-    types: string[];
-    weight: number;
-    height: number;
-    stats: {
-      base_stat: number;
-      effort: number;
-      stat: {
-        name: string;
-        url: string;
-      };
-    }[];
-    ability: {
-      name: string;
-      url: string;
-    };
-  }[];
+  favorites: PokemonDetailTypes[];
 }
 
 const Pokemon = ({
