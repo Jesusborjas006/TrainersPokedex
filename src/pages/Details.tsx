@@ -11,16 +11,19 @@ import Navbar from "../ui/Navbar";
 const Details = () => {
   const navigate = useNavigate();
   const pokemonEndpoint = useParams();
+  const { pokemon } = pokemonEndpoint;
   const {
     data: pokemonInfo,
     isPending,
     isError,
   } = useQuery({
     queryKey: ["pokemonDetails", pokemonEndpoint.pokemon],
-    queryFn: () => getPokemonInfo(pokemonEndpoint.pokemon),
+    queryFn: () => getPokemonInfo(pokemon!),
   });
-  const pokemonSpecies = usePokemonSpecies(pokemonEndpoint.pokemon);
+  const pokemonSpecies = usePokemonSpecies(pokemon!);
   const pokemonAbility = usePokemonAbility(pokemonInfo?.ability.url);
+
+  console.log(pokemon);
 
   const pokemonStats = pokemonInfo?.stats;
 

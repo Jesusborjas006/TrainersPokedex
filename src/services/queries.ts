@@ -33,6 +33,7 @@ export const usePokemonSpecies = (pokemonName: string) => {
   return useQuery({
     queryKey: ["species", pokemonName],
     queryFn: () => getPokemonSpecies(pokemonName),
+    enabled: pokemonName !== "",
   });
 };
 
