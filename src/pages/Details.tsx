@@ -23,11 +23,7 @@ const Details = () => {
   const abilityUrl = pokemonInfo?.ability.url || "";
   const pokemonSpecies = usePokemonSpecies(pokemon!);
   const pokemonAbility = usePokemonAbility(abilityUrl);
-
-  console.log(pokemonAbility?.data);
-
   const pokemonStats = pokemonInfo?.stats;
-
   const formattedStats = pokemonStats?.map((stat) => {
     return {
       ...stat,
