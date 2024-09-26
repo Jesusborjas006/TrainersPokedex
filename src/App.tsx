@@ -9,7 +9,7 @@ import toast from "react-hot-toast";
 import { capitalizeString } from "./utils/utils";
 import Pokedex from "./pages/Pokedex";
 import NotFound from "./pages/NotFound";
-import { PokemonFavoriteTypes } from "./types/pokemon";
+import { PokemonDetailTypes } from "./types/pokemon";
 
 function App() {
   const [pokemonQuery, setPokemonQuery] = useState({
@@ -19,13 +19,18 @@ function App() {
   });
   const pokemon = usePokemon(pokemonQuery.startId, pokemonQuery.limit);
   const pokemonDetails = usePokemonDetails(pokemon);
-  const [favorites, setFavorites] = useState<PokemonFavoriteTypes[] | []>([]);
+  const [favorites, setFavorites] = useState<PokemonDetailTypes[] | []>([]);
   const [searchInput, setSearchInput] = useState("");
 
   const addToFavorites = (pokemonId: number) => {
     const pokemonFavoritedData = pokemonDetails.find((pokemon) => {
       return pokemon.data?.id === pokemonId;
     });
+
+    if (!pokemonFavoritedData || !pokemonFavoritedData.data) {
+      toast.error("Pokemon data not found.");
+      return;
+    }
 
     const namesInFavorites = favorites.map((pokemon) => pokemon?.name);
     const pokemonNameFavorited = pokemonFavoritedData?.data?.name;

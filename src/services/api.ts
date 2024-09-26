@@ -1,6 +1,6 @@
 import {
   PokemonAbility,
-  PokemonFavoriteTypes,
+  PokemonDetailTypes,
   PokemonType,
 } from "../types/pokemon";
 
@@ -43,7 +43,7 @@ export const getPokemonDetails = async (pokemonName: string) => {
     height,
     stats,
     ability: abilities.length > 0 ? abilities[0].ability : null,
-  } as PokemonFavoriteTypes;
+  } as PokemonDetailTypes;
 };
 
 export const getPokemonSpecies = async (pokemonName: string) => {
@@ -104,5 +104,5 @@ export const getPokemonInfo = async (pokemonName: string) => {
     height,
     stats,
     ability: abilities.length > 0 ? abilities[0].ability : null,
-  } as PokemonFavoriteTypes;
+  } as PokemonDetailTypes;
 };

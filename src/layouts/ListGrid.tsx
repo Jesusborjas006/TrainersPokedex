@@ -1,7 +1,5 @@
-import { ReactElement } from "react";
-
 interface ListGridProps {
-  children: ReactElement | ReactElement[];
+  children: (JSX.Element | undefined)[];
 }
 
 const ListGrid = ({ children }: ListGridProps) => {
